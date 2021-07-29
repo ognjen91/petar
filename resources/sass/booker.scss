@@ -4,3 +4,25 @@
     border-bottom: 1px solid #e2e8f0;
     padding-bottom: 5px;
 }
+
+table#my-reservations {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #my-reservations td, #my-reservations th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  #my-reservations tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+
+  #my-reservations-params .pick-open{
+    // position: absolute;
+    // left: 20px;
+  }

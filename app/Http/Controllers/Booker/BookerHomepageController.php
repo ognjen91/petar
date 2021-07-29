@@ -14,6 +14,6 @@ class BookerHomepageController extends Controller
     
     public function __invoke(){
         $excursionTypes = ExcursionTypeResource::collection(ExcursionType::all())->resolve();
-        return view('booker-home', compact('excursionTypes'));
+        return view('booker.booker-home', compact('excursionTypes'));
     }
 }

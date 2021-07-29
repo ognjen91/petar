@@ -13,6 +13,9 @@ class BookController extends Controller
 
         // selectedExcursionId : this.selectedExcursionId,
         // seats : this.seats
+        return response()->json([
+            'status' => 'Greška! Broj slobodnih mjesta je u međuvremenu smanjen. Molimo da odaberete drugi broj i pokušate ponovo'
+        ], 501); 
 
         $excursion = Excursion::find($request->selectedExcursionId);
         if($excursion->freeSeats < $request->seats){
@@ -22,7 +25,7 @@ class BookController extends Controller
         }
 
         $excursion->reservations()->create([
-            'booker_id' => 3, //todo : add the logic,
+            'booker_id' => auth()->user()->id, //todo : add the logic,
             'seats' => $request->seats,
             'station_id' => $request->station,
             'price' => $request->price

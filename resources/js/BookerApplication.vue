@@ -78,6 +78,15 @@
              </v-col>
         </v-row>
 
+        <SuccessDialog 
+        :show="showSuccessDialog" 
+        @closeSuccessDialog="showSuccessDialog = false"
+        />
+        <ErrorDialog
+        :show="showErrorDialog"
+        :error='error'
+        @closeErrorDialog="showSuccessDialog = false"
+        />
 
 
     </v-container>
@@ -87,6 +96,8 @@ import ExcursionTypeSelect from './Components/Booker/ExcursionTypeSelect'
 import StationSelect from './Components/Booker/StationSelect'
 import DatePicker from './Components/Booker/DatePicker'
 import ExcursionsOnTheDateWithEnoughSeats from './Components/Booker/ExcursionsOnTheDateWithEnoughSeats'
+import SuccessDialog from './Components/Booker/SuccessDialog'
+import ErrorDialog from './Components/Booker/ErrorDialog'
 import axios from 'axios'
 
 export default {
@@ -94,7 +105,9 @@ export default {
         ExcursionTypeSelect,
         StationSelect,
         DatePicker,
-        ExcursionsOnTheDateWithEnoughSeats
+        ExcursionsOnTheDateWithEnoughSeats,
+        SuccessDialog,
+        ErrorDialog
     },
     props : {
         excursionTypes : {
@@ -113,7 +126,10 @@ export default {
             seats : 1,
             price : null,
             selectedExcursionId : null,
-            showBookBtn : false
+            showBookBtn : false,
+            showSuccessDialog : false,
+            showErrorDialog : false,
+            error : ""
         }
     },
 
@@ -151,10 +167,8 @@ export default {
                 selectedDate : this.selectedDate
             }).then(({data}) => {
                 this.excursionsOnTheDate = data.excursionsOnTheDate
-                console.log(data);
             })
             .catch((error) => {
-                console.log(error);
             })
         },
 
@@ -165,11 +179,11 @@ export default {
                 seats : this.seats,
                 price : this.price
             }).then(({data}) => {
-                // this.excursionsOnTheDate = data.excursionsOnTheDate
-                console.log(data.status);
+                this.showSuccessDialog = true
             })
             .catch((error) => {
-                console.log(error);
+                this.showErrorDialog = true
+                if(error.response.status === 501) this.error = error.response.data.status
             })
         }
     },

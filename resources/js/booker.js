@@ -15,10 +15,12 @@ const store = new Vuex.Store(storeData)
 import BookerApplication from './BookerApplication.vue'
 import DatePicker from './Components/Booker/DatePicker.vue'
 import ExcursionTypeSelect from './Components/Booker/ExcursionTypeSelect.vue'
+import BookerRedirectParamsSelect from './Components/Booker/BookerRedirectParamsSelect.vue'
 
 Vue.component('booker-application', BookerApplication)
 Vue.component('date-picker', DatePicker)
 Vue.component('excursion-type-select', ExcursionTypeSelect)
+Vue.component('booker-redirect-params-select', BookerRedirectParamsSelect)
 
 
 const app = new Vue({

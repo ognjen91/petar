@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Booker\BookerHomepageController;
 use App\Http\Controllers\Booker\CheckExcursionsForDateAndTypeController;
 use App\Http\Controllers\Booker\BookController;
-use App\Http\Controllers\BookerPdfReportController;
-use App\Http\Controllers\DownloadBookerPdfReport;
+use App\Http\Controllers\Booker\BookerReservationsController;
+use App\Http\Controllers\Booker\BookerPdfReportController;
+use App\Http\Controllers\Booker\DownloadBookerPdfReport;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,10 +20,16 @@ use App\Http\Controllers\DownloadBookerPdfReport;
 
 
 Route::domain('booker.petar-booking.test')->group(function () {
-    Route::get('/', BookerHomepageController::class);
-    Route::post('/check-excursions-on-date', CheckExcursionsForDateAndTypeController::class);
-    Route::post('/book', BookController::class);
+    Route::get('/', BookerHomepageController::class)->middleware('auth');
+    Route::get('/moje-rezervacije', BookerReservationsController::class)->middleware('auth');
+    Route::post('/check-excursions-on-date', CheckExcursionsForDateAndTypeController::class)->middleware('auth');
+    Route::post('/book', BookController::class)->middleware('auth');
 });
+
+Route::domain('booker.petar-booking.test')->group(function () {
+    require __DIR__.'/auth.php';
+});
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,3 +40,9 @@ Route::get('/', function () {
 Route::get('/booker', BookerPdfReportController::class);
 //ACTUAL DOWNLOAD ROUTE
 Route::get('/booker/pdf-download', DownloadBookerPdfReport::class)->name('booker-pdf-download');
+
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');

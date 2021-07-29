@@ -1849,8 +1849,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Booker_StationSelect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/Booker/StationSelect */ "./resources/js/Components/Booker/StationSelect.vue");
 /* harmony import */ var _Components_Booker_DatePicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/Booker/DatePicker */ "./resources/js/Components/Booker/DatePicker.vue");
 /* harmony import */ var _Components_Booker_ExcursionsOnTheDateWithEnoughSeats__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Booker/ExcursionsOnTheDateWithEnoughSeats */ "./resources/js/Components/Booker/ExcursionsOnTheDateWithEnoughSeats.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Components_Booker_SuccessDialog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/Booker/SuccessDialog */ "./resources/js/Components/Booker/SuccessDialog.vue");
+/* harmony import */ var _Components_Booker_ErrorDialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Components/Booker/ErrorDialog */ "./resources/js/Components/Booker/ErrorDialog.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
 //
 //
 //
@@ -1935,6 +1937,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -1945,7 +1958,9 @@ __webpack_require__.r(__webpack_exports__);
     ExcursionTypeSelect: _Components_Booker_ExcursionTypeSelect__WEBPACK_IMPORTED_MODULE_0__.default,
     StationSelect: _Components_Booker_StationSelect__WEBPACK_IMPORTED_MODULE_1__.default,
     DatePicker: _Components_Booker_DatePicker__WEBPACK_IMPORTED_MODULE_2__.default,
-    ExcursionsOnTheDateWithEnoughSeats: _Components_Booker_ExcursionsOnTheDateWithEnoughSeats__WEBPACK_IMPORTED_MODULE_3__.default
+    ExcursionsOnTheDateWithEnoughSeats: _Components_Booker_ExcursionsOnTheDateWithEnoughSeats__WEBPACK_IMPORTED_MODULE_3__.default,
+    SuccessDialog: _Components_Booker_SuccessDialog__WEBPACK_IMPORTED_MODULE_4__.default,
+    ErrorDialog: _Components_Booker_ErrorDialog__WEBPACK_IMPORTED_MODULE_5__.default
   },
   props: {
     excursionTypes: {
@@ -1965,7 +1980,10 @@ __webpack_require__.r(__webpack_exports__);
       seats: 1,
       price: null,
       selectedExcursionId: null,
-      showBookBtn: false
+      showBookBtn: false,
+      showSuccessDialog: false,
+      showErrorDialog: false,
+      error: ""
     };
   },
   computed: {
@@ -2000,29 +2018,28 @@ __webpack_require__.r(__webpack_exports__);
     checkAvailableTimes: function checkAvailableTimes() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_4___default().post('check-excursions-on-date', {
+      axios__WEBPACK_IMPORTED_MODULE_6___default().post('check-excursions-on-date', {
         selectedExcursionTypeId: this.selectedExcursionType.id,
         selectedDate: this.selectedDate
       }).then(function (_ref) {
         var data = _ref.data;
         _this2.excursionsOnTheDate = data.excursionsOnTheDate;
-        console.log(data);
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      })["catch"](function (error) {});
     },
     book: function book() {
-      axios__WEBPACK_IMPORTED_MODULE_4___default().post('book', {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_6___default().post('book', {
         selectedExcursionId: this.selectedExcursionId,
         station: this.selectedStationId,
         seats: this.seats,
         price: this.price
       }).then(function (_ref2) {
         var data = _ref2.data;
-        // this.excursionsOnTheDate = data.excursionsOnTheDate
-        console.log(data.status);
+        _this3.showSuccessDialog = true;
       })["catch"](function (error) {
-        console.log(error);
+        _this3.showErrorDialog = true;
+        if (error.response.status === 501) _this3.error = error.response.data.status;
       });
     }
   },
@@ -2033,6 +2050,124 @@ __webpack_require__.r(__webpack_exports__);
     excursionsOnTheDateWithEnoughSeats: function excursionsOnTheDateWithEnoughSeats(newVal) {
       if (newVal.length) this.selectedExcursionId = false;
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/BookerRedirectParamsSelect.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/BookerRedirectParamsSelect.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    excursionTypes: {
+      Type: Array,
+      required: false,
+      "default": function _default() {
+        return [];
+      }
+    },
+    initialStartDate: {
+      Type: String,
+      required: false,
+      "default": new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)
+    },
+    initialEndDate: {
+      Type: String,
+      required: false,
+      "default": new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)
+    }
+  },
+  data: function data() {
+    return {
+      selectedType: {
+        state: 'Izaberite izlet',
+        id: null
+      },
+      startCalendar: false,
+      endCalendar: false,
+      startDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
+      endDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)
+    };
+  },
+  methods: {
+    setStartDate: function setStartDate(date) {
+      this.startDate = date;
+      this.startCalendar = false;
+    },
+    setEndDate: function setEndDate(date) {
+      this.endDate = date;
+      this.endCalendar = false;
+    },
+    redirect: function redirect() {
+      var url = "/moje-rezervacije?";
+      if (this.selectedType.id) url += "excursionType=".concat(this.selectedType.id, "&");
+      if (this.startDate) url += "type=".concat(this.startDate, "&");
+      if (this.endDate) url += "type=".concat(this.endDate, "&");
+      window.location.href = url;
+    }
+  },
+  watch: {
+    startCalendar: function startCalendar(newVal) {
+      if (newVal) this.endCalendar = false;
+    },
+    endCalendar: function endCalendar(newVal) {
+      if (newVal) this.startCalendar = false;
+    }
+  },
+  mounted: function mounted() {
+    this.startDate = this.initialStartDate;
+    this.endDate = this.initialEndDate;
   }
 });
 
@@ -2080,6 +2215,67 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.selectedDate = this.initialDate;
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/ErrorDialog.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/ErrorDialog.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    show: {
+      Type: Boolean,
+      required: true
+    },
+    error: {
+      Type: String,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      multiLine: true,
+      showSnackbar: false
+    };
+  },
+  watch: {
+    show: function show(newVal) {
+      this.showSnackbar = newVal;
+    }
   }
 });
 
@@ -2253,6 +2449,64 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/SuccessDialog.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/SuccessDialog.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    show: {
+      Type: Boolean,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      multiLine: true,
+      showSnackbar: false,
+      text: "I'm a multi-line snackbar."
+    };
+  },
+  watch: {
+    show: function show(newVal) {
+      this.showSnackbar = newVal;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/booker.js":
 /*!********************************!*\
   !*** ./resources/js/booker.js ***!
@@ -2269,6 +2523,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BookerApplication_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./BookerApplication.vue */ "./resources/js/BookerApplication.vue");
 /* harmony import */ var _Components_Booker_DatePicker_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Components/Booker/DatePicker.vue */ "./resources/js/Components/Booker/DatePicker.vue");
 /* harmony import */ var _Components_Booker_ExcursionTypeSelect_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Components/Booker/ExcursionTypeSelect.vue */ "./resources/js/Components/Booker/ExcursionTypeSelect.vue");
+/* harmony import */ var _Components_Booker_BookerRedirectParamsSelect_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Components/Booker/BookerRedirectParamsSelect.vue */ "./resources/js/Components/Booker/BookerRedirectParamsSelect.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
  // window.Vue = require('vue').default;
@@ -2283,9 +2538,11 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__.default.Store(_store_booker_st
 
 
 
+
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('booker-application', _BookerApplication_vue__WEBPACK_IMPORTED_MODULE_4__.default);
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('date-picker', _Components_Booker_DatePicker_vue__WEBPACK_IMPORTED_MODULE_5__.default);
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('excursion-type-select', _Components_Booker_ExcursionTypeSelect_vue__WEBPACK_IMPORTED_MODULE_6__.default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('booker-redirect-params-select', _Components_Booker_BookerRedirectParamsSelect_vue__WEBPACK_IMPORTED_MODULE_7__.default);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0__.default({
   el: '#app',
   store: store,
@@ -19625,6 +19882,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/css/app.css":
+/*!*******************************!*\
+  !*** ./resources/css/app.css ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -19858,6 +20128,45 @@ component.options.__file = "resources/js/BookerApplication.vue"
 
 /***/ }),
 
+/***/ "./resources/js/Components/Booker/BookerRedirectParamsSelect.vue":
+/*!***********************************************************************!*\
+  !*** ./resources/js/Components/Booker/BookerRedirectParamsSelect.vue ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _BookerRedirectParamsSelect_vue_vue_type_template_id_0a5e005c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BookerRedirectParamsSelect.vue?vue&type=template&id=0a5e005c& */ "./resources/js/Components/Booker/BookerRedirectParamsSelect.vue?vue&type=template&id=0a5e005c&");
+/* harmony import */ var _BookerRedirectParamsSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BookerRedirectParamsSelect.vue?vue&type=script&lang=js& */ "./resources/js/Components/Booker/BookerRedirectParamsSelect.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _BookerRedirectParamsSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _BookerRedirectParamsSelect_vue_vue_type_template_id_0a5e005c___WEBPACK_IMPORTED_MODULE_0__.render,
+  _BookerRedirectParamsSelect_vue_vue_type_template_id_0a5e005c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/Booker/BookerRedirectParamsSelect.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Components/Booker/DatePicker.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/Components/Booker/DatePicker.vue ***!
@@ -19893,6 +20202,45 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/Components/Booker/DatePicker.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Components/Booker/ErrorDialog.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/Components/Booker/ErrorDialog.vue ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ErrorDialog_vue_vue_type_template_id_452effbc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ErrorDialog.vue?vue&type=template&id=452effbc& */ "./resources/js/Components/Booker/ErrorDialog.vue?vue&type=template&id=452effbc&");
+/* harmony import */ var _ErrorDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ErrorDialog.vue?vue&type=script&lang=js& */ "./resources/js/Components/Booker/ErrorDialog.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _ErrorDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _ErrorDialog_vue_vue_type_template_id_452effbc___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ErrorDialog_vue_vue_type_template_id_452effbc___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/Booker/ErrorDialog.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -20014,6 +20362,45 @@ component.options.__file = "resources/js/Components/Booker/StationSelect.vue"
 
 /***/ }),
 
+/***/ "./resources/js/Components/Booker/SuccessDialog.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/Components/Booker/SuccessDialog.vue ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SuccessDialog_vue_vue_type_template_id_54175c46___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SuccessDialog.vue?vue&type=template&id=54175c46& */ "./resources/js/Components/Booker/SuccessDialog.vue?vue&type=template&id=54175c46&");
+/* harmony import */ var _SuccessDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SuccessDialog.vue?vue&type=script&lang=js& */ "./resources/js/Components/Booker/SuccessDialog.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _SuccessDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _SuccessDialog_vue_vue_type_template_id_54175c46___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SuccessDialog_vue_vue_type_template_id_54175c46___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/Booker/SuccessDialog.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/BookerApplication.vue?vue&type=script&lang=js&":
 /*!*********************************************************************!*\
   !*** ./resources/js/BookerApplication.vue?vue&type=script&lang=js& ***!
@@ -20030,6 +20417,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/Booker/BookerRedirectParamsSelect.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/Components/Booker/BookerRedirectParamsSelect.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BookerRedirectParamsSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BookerRedirectParamsSelect.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/BookerRedirectParamsSelect.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BookerRedirectParamsSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/Components/Booker/DatePicker.vue?vue&type=script&lang=js&":
 /*!********************************************************************************!*\
   !*** ./resources/js/Components/Booker/DatePicker.vue?vue&type=script&lang=js& ***!
@@ -20043,6 +20446,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DatePicker.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/DatePicker.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/Components/Booker/ErrorDialog.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/Components/Booker/ErrorDialog.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ErrorDialog.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/ErrorDialog.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -20094,6 +20513,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/Booker/SuccessDialog.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/Components/Booker/SuccessDialog.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SuccessDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SuccessDialog.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/SuccessDialog.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SuccessDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/BookerApplication.vue?vue&type=template&id=b9696b28&":
 /*!***************************************************************************!*\
   !*** ./resources/js/BookerApplication.vue?vue&type=template&id=b9696b28& ***!
@@ -20111,6 +20546,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/Booker/BookerRedirectParamsSelect.vue?vue&type=template&id=0a5e005c&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/Components/Booker/BookerRedirectParamsSelect.vue?vue&type=template&id=0a5e005c& ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookerRedirectParamsSelect_vue_vue_type_template_id_0a5e005c___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookerRedirectParamsSelect_vue_vue_type_template_id_0a5e005c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookerRedirectParamsSelect_vue_vue_type_template_id_0a5e005c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BookerRedirectParamsSelect.vue?vue&type=template&id=0a5e005c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/BookerRedirectParamsSelect.vue?vue&type=template&id=0a5e005c&");
+
+
+/***/ }),
+
 /***/ "./resources/js/Components/Booker/DatePicker.vue?vue&type=template&id=149219cc&":
 /*!**************************************************************************************!*\
   !*** ./resources/js/Components/Booker/DatePicker.vue?vue&type=template&id=149219cc& ***!
@@ -20124,6 +20576,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_template_id_149219cc___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_template_id_149219cc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DatePicker.vue?vue&type=template&id=149219cc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/DatePicker.vue?vue&type=template&id=149219cc&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/Booker/ErrorDialog.vue?vue&type=template&id=452effbc&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/Components/Booker/ErrorDialog.vue?vue&type=template&id=452effbc& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorDialog_vue_vue_type_template_id_452effbc___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorDialog_vue_vue_type_template_id_452effbc___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorDialog_vue_vue_type_template_id_452effbc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ErrorDialog.vue?vue&type=template&id=452effbc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/ErrorDialog.vue?vue&type=template&id=452effbc&");
 
 
 /***/ }),
@@ -20175,6 +20644,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StationSelect_vue_vue_type_template_id_39e370fc___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StationSelect_vue_vue_type_template_id_39e370fc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StationSelect.vue?vue&type=template&id=39e370fc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/StationSelect.vue?vue&type=template&id=39e370fc&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/Booker/SuccessDialog.vue?vue&type=template&id=54175c46&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/Components/Booker/SuccessDialog.vue?vue&type=template&id=54175c46& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SuccessDialog_vue_vue_type_template_id_54175c46___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SuccessDialog_vue_vue_type_template_id_54175c46___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SuccessDialog_vue_vue_type_template_id_54175c46___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SuccessDialog.vue?vue&type=template&id=54175c46& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/SuccessDialog.vue?vue&type=template&id=54175c46&");
 
 
 /***/ }),
@@ -20375,6 +20861,170 @@ var render = function() {
           )
         ],
         1
+      ),
+      _vm._v(" "),
+      _c("SuccessDialog", {
+        attrs: { show: _vm.showSuccessDialog },
+        on: {
+          closeSuccessDialog: function($event) {
+            _vm.showSuccessDialog = false
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("ErrorDialog", {
+        attrs: { show: _vm.showErrorDialog, error: _vm.error },
+        on: {
+          closeErrorDialog: function($event) {
+            _vm.showSuccessDialog = false
+          }
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/BookerRedirectParamsSelect.vue?vue&type=template&id=0a5e005c&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/BookerRedirectParamsSelect.vue?vue&type=template&id=0a5e005c& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-row",
+    { attrs: { id: "my-reservations-params" } },
+    [
+      _c(
+        "v-col",
+        {
+          staticClass: "flex items-center justify-center flex-column",
+          attrs: { cols: "6", md: "4", lg: "3" }
+        },
+        [
+          _c(
+            "p",
+            {
+              on: {
+                click: function($event) {
+                  _vm.startCalendar = !_vm.startCalendar
+                }
+              }
+            },
+            [_vm._v("Od: " + _vm._s(_vm.startDate))]
+          ),
+          _vm._v(" "),
+          _vm.startCalendar
+            ? _c("v-date-picker", {
+                staticClass: "pick-open",
+                on: { input: _vm.setStartDate },
+                model: {
+                  value: _vm.startDate,
+                  callback: function($$v) {
+                    _vm.startDate = $$v
+                  },
+                  expression: "startDate"
+                }
+              })
+            : _vm._e()
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-col",
+        {
+          staticClass: "flex items-center justify-center flex-column",
+          attrs: { cols: "6", md: "4", lg: "3" }
+        },
+        [
+          _c(
+            "p",
+            {
+              on: {
+                click: function($event) {
+                  _vm.endCalendar = !_vm.endCalendar
+                }
+              }
+            },
+            [_vm._v("Do: " + _vm._s(_vm.endDate))]
+          ),
+          _vm._v(" "),
+          _vm.endCalendar
+            ? _c("v-date-picker", {
+                staticClass: "pick-open",
+                on: { input: _vm.setEndDate },
+                model: {
+                  value: _vm.endDate,
+                  callback: function($$v) {
+                    _vm.endDate = $$v
+                  },
+                  expression: "endDate"
+                }
+              })
+            : _vm._e()
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-col",
+        {
+          staticClass: "flex items-center justify-center flex-column",
+          attrs: { cols: "6", md: "4", lg: "3" }
+        },
+        [
+          _c("v-select", {
+            attrs: {
+              items: _vm.excursionTypes,
+              "item-text": "name",
+              "item-value": "id",
+              label: "Izaberite izlet",
+              "return-object": "",
+              "single-line": ""
+            },
+            model: {
+              value: _vm.selectedType,
+              callback: function($$v) {
+                _vm.selectedType = $$v
+              },
+              expression: "selectedType"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-col",
+        {
+          staticClass: "flex items-center justify-center flex-column",
+          attrs: { cols: "6", md: "4", lg: "3" }
+        },
+        [
+          _c(
+            "v-btn",
+            { attrs: { elevation: "2" }, on: { click: _vm.redirect } },
+            [_vm._v("Prikaži")]
+          )
+        ],
+        1
       )
     ],
     1
@@ -20426,6 +21076,80 @@ var render = function() {
           })
         ],
         1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/ErrorDialog.vue?vue&type=template&id=452effbc&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/ErrorDialog.vue?vue&type=template&id=452effbc& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "text-center" },
+    [
+      _c("v-overlay", { attrs: { value: _vm.showSnackbar } }),
+      _vm._v(" "),
+      _c(
+        "v-snackbar",
+        {
+          attrs: { "multi-line": _vm.multiLine, color: "red", centered: "" },
+          scopedSlots: _vm._u([
+            {
+              key: "action",
+              fn: function(ref) {
+                var attrs = ref.attrs
+                return [
+                  _c(
+                    "v-btn",
+                    _vm._b(
+                      {
+                        attrs: { color: "black", text: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.$emit("closeErrorDialog")
+                          }
+                        }
+                      },
+                      "v-btn",
+                      attrs,
+                      false
+                    ),
+                    [_vm._v("\n        Zatvori\n      ")]
+                  )
+                ]
+              }
+            }
+          ]),
+          model: {
+            value: _vm.showSnackbar,
+            callback: function($$v) {
+              _vm.showSnackbar = $$v
+            },
+            expression: "showSnackbar"
+          }
+        },
+        [_vm._v("\n      " + _vm._s(_vm.error) + "\n    ")]
       )
     ],
     1
@@ -20602,6 +21326,80 @@ var render = function() {
           })
         ],
         1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/SuccessDialog.vue?vue&type=template&id=54175c46&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/SuccessDialog.vue?vue&type=template&id=54175c46& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "text-center" },
+    [
+      _c("v-overlay", { attrs: { value: _vm.showSnackbar } }),
+      _vm._v(" "),
+      _c(
+        "v-snackbar",
+        {
+          attrs: { "multi-line": _vm.multiLine, color: "green", centered: "" },
+          scopedSlots: _vm._u([
+            {
+              key: "action",
+              fn: function(ref) {
+                var attrs = ref.attrs
+                return [
+                  _c(
+                    "v-btn",
+                    _vm._b(
+                      {
+                        attrs: { color: "red", text: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.$emit("closeSuccessDialog")
+                          }
+                        }
+                      },
+                      "v-btn",
+                      attrs,
+                      false
+                    ),
+                    [_vm._v("\n        Zatvori\n      ")]
+                  )
+                ]
+              }
+            }
+          ]),
+          model: {
+            value: _vm.showSnackbar,
+            callback: function($$v) {
+              _vm.showSnackbar = $$v
+            },
+            expression: "showSnackbar"
+          }
+        },
+        [_vm._v("\n      Rezervacija je uspješno izvršena\n    ")]
       )
     ],
     1
@@ -79575,7 +80373,8 @@ var index = {
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/booker": 0,
-/******/ 			"css/booker": 0
+/******/ 			"css/booker": 0,
+/******/ 			"css/app": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -79623,8 +80422,9 @@ var index = {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/booker"], () => (__webpack_require__("./resources/js/booker.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/booker"], () => (__webpack_require__("./resources/sass/booker.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/booker","css/app"], () => (__webpack_require__("./resources/js/booker.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/booker","css/app"], () => (__webpack_require__("./resources/sass/booker.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/booker","css/app"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
