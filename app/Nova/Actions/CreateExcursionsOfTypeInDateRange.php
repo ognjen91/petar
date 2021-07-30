@@ -37,7 +37,7 @@ class CreateExcursionsOfTypeInDateRange extends Action
         
         $explodedTime = explode(":", $fields->time); //explodes 12:00 to [12,00]
         if(!isset($explodedTime[0]) || !isset($explodedTime[1])) return Action::danger('Molimo da unesete ispravan format vremena');
-        if(!is_int($explodedTime[0]) || !is_int($explodedTime[1])) return Action::danger('Molimo da unesete ispravan format vremena');
+        // if(!is_int($explodedTime[0]) || !is_int($explodedTime[1])) return Action::danger('Molimo da unesete ispravan format vremena');
 
         $firstDate = Carbon::parse($fields->firstDate)->set('hour', $explodedTime[0])->set('minute', $explodedTime[1])->setTimezone('Europe/Belgrade');
         $lastDate = Carbon::parse($fields->lastDate)->set('hour', $explodedTime[0])->set('minute', $explodedTime[1])->setTimezone('Europe/Belgrade');

@@ -22,6 +22,6 @@ class ExcursionType extends Model
         
     public function stations()
     {
-        return $this->belongsToMany(ExcursionType::class, 'excursion_type_station', 'excursion_type_id', 'station_id');
+        return $this->belongsToMany(Station::class, 'excursion_type_station');
     }
 }

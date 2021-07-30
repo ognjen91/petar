@@ -1,5 +1,17 @@
 @import '~vuetify/dist/vuetify.min.css';
 
+
+#app>:first-child{
+  padding-top: 20px;
+}
+
+#nav-drawer-trigger{
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+
+
 #seats, #price{
     border-bottom: 1px solid #e2e8f0;
     padding-bottom: 5px;

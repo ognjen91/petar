@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Reservation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['booker_id', 'excursion_id', 'seats', 'station_id', 'price', 'active'];
+    protected $fillable = ['booker_id', 'excursion_id', 'seats', 'station_id', 'price', 'active', 'cancelation_time'];
 
 
     /**
@@ -28,6 +29,7 @@ class Reservation extends Model
         return $this->belongsTo(User::class, 'booker_id');
     }
 
+
     /**
      * SCOPES
      */
@@ -36,6 +38,14 @@ class Reservation extends Model
     {
         return $query->where('active', 1);
     }
+
+    /**
+     * ACCESSORS
+     */
+
+     public function getIsInFutureAttribute(){
+         return Carbon::parse($this->excursion->departure) > Carbon::now();
+     }
 
 
 

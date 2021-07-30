@@ -5,36 +5,26 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\DateTime;
 
 
-use App\Nova\Filters\ReservationBooker;
-use App\Nova\Filters\ReservationExcursionType;
-use App\Nova\Filters\ReservationExcursionExactDate;
-use App\Nova\Filters\ReservationExcursionStartDate;
-use App\Nova\Filters\ReservationExcursionLastDate;
-
-
-class Reservation extends Resource
+class SeatChangeHistory extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Reservation::class;
+    public static $model = \App\Models\SeatChangeHistory::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    // public static $title = 'id';
-    public function title(){
-        return $this->booker->name;
-    }
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -45,27 +35,10 @@ class Reservation extends Resource
         'id',
     ];
 
-    /**
-     * [label in the admin panel]
-     * @return [String]
-     */
-
-    public static function label()
+    public static function availableForNavigation(Request $request)
     {
-        return 'Rezervacije';
+        return false;
     }
-
-    /**
-     * [singular label in the admin panel]
-     * @return [String]
-     */
-
-    public static function singularLabel()
-    {
-        return 'Rezervacija';
-    }
-
-
 
     /**
      * Get the fields displayed by the resource.
@@ -76,13 +49,10 @@ class Reservation extends Resource
     public function fields(Request $request)
     {
         return [
-            // ID::make(__('ID'), 'id')->sortable(),
-            BelongsTo::make('Izlet', 'excursion', 'App\Nova\Excursion'),
-            Text::make('Broj mjesta', 'seats'),
-            Text::make('Naplaćena cijena', 'price'),
-            BelongsTo::make('Stanica', 'station', 'App\Nova\Station'),
-            BelongsTo::make('Buker', 'booker', 'App\Nova\User'),
-            Boolean::make('Status', 'active')->readonly()
+            ID::make(__('ID'), 'id')->sortable(),
+            Number::make('Prethodni broj mjesta', 'seats_old_value')->readonly(),
+            Number::make('Novi broj mjesta', 'seats_new_value')->readonly(),
+            DateTime::make('Vrijeme', 'created_at')->readonly()
         ];
     }
 
@@ -105,13 +75,7 @@ class Reservation extends Resource
      */
     public function filters(Request $request)
     {
-        return [
-            new ReservationBooker,
-            new ReservationExcursionType,
-            new ReservationExcursionExactDate,
-            new ReservationExcursionStartDate,
-            new ReservationExcursionLastDate,
-        ];
+        return [];
     }
 
     /**
@@ -133,7 +97,6 @@ class Reservation extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-        ];
+        return [];
     }
 }

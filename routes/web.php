@@ -7,6 +7,7 @@ use App\Http\Controllers\Booker\BookController;
 use App\Http\Controllers\Booker\BookerReservationsController;
 use App\Http\Controllers\Booker\BookerPdfReportController;
 use App\Http\Controllers\Booker\DownloadBookerPdfReport;
+use App\Http\Controllers\Booker\ReservationCancelationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,9 +22,11 @@ use App\Http\Controllers\Booker\DownloadBookerPdfReport;
 
 Route::domain('booker.petar-booking.test')->group(function () {
     Route::get('/', BookerHomepageController::class)->middleware('auth');
-    Route::get('/moje-rezervacije', BookerReservationsController::class)->middleware('auth');
     Route::post('/check-excursions-on-date', CheckExcursionsForDateAndTypeController::class)->middleware('auth');
+    Route::get('/moje-rezervacije', [BookerReservationsController::class, 'index'])->name('my-reservations.index')->middleware('auth');
+    Route::get('/moje-rezervacije/{reservation}', [BookerReservationsController::class, 'show'])->name('my-reservations.show')->middleware('auth');
     Route::post('/book', BookController::class)->middleware('auth');
+    Route::post('/cancel-reservation/{reservation}', ReservationCancelationController::class)->middleware('auth');
 });
 
 Route::domain('booker.petar-booking.test')->group(function () {

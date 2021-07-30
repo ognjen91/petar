@@ -17,8 +17,10 @@
 
     </head>
     <body class="">
-        <v-app id="app">
-                 {{ $slot }}
+        <v-app id="app" class=''>
+            <navigation-drawer bookers-name="{{auth()->user()->name}}"></navigation-drawer>
+            {{ $slot }}
+            <booker-footer></booker-footer>
         </v-app>
         <script src="{{asset('js/booker.js')}}"></script>
     </body>

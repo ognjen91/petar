@@ -1,6 +1,6 @@
 <template>
     <v-container class="grey lighten-5">
-        <v-row>
+        <v-row class='mt-4'>
             <v-col cols="12" class="">
                 <h1 class='text-center blue--text'>Petar Boats Booking</h1>
             </v-col>
@@ -29,12 +29,12 @@
         <v-row>
             <v-col cols="12" class='flex flex-column justify-center items-center'>
                 <div class="mb-3">
-                    <label for="seats">Broj mjesta</label><br>
+                    <label for="seats"><strong>Broj mjesta</strong></label><br>
                     <input id="seats" type="number" placeholder="Broj mjesta" v-model="seats" min="1">
                 </div>
                 <div class="">
-                    <label for="price">Naplaćeni iznos</label><br>
-                    <input id="price" type="number" placeholder="" v-model="price" min="0" step="0.1">
+                    <label for="price"><strong>Naplaćeni iznos</strong></label><br>
+                    <input id="price" type="number" placeholder="iznos u evrima" v-model="price" min="0" step="0.1">
                 </div>
              </v-col>
         </v-row>
@@ -59,7 +59,7 @@
                 x-large
                 style="width: 100%;"
                 @click="book"
-                v-if='showBookBtn && price && seats && selectedExcursionId && selectedStationId '
+                v-if='price && seats && selectedExcursionId && selectedStationId '
                 >
                 Bukiraj izlet
                 </v-btn>
@@ -182,8 +182,12 @@ export default {
                 this.showSuccessDialog = true
             })
             .catch((error) => {
-                this.showErrorDialog = true
-                if(error.response.status === 501) this.error = error.response.data.status
+                if(error.response.status === 501){
+                    this.showErrorDialog = true
+                    this.error = error.response.data.status
+                } else {
+                    alert('Došlo je do greške')
+                }
             })
         }
     },

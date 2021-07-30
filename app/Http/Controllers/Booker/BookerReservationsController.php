@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class BookerReservationsController extends Controller
 {
-    public function __invoke(Request $request){
+    public function index(Request $request){
         $excursionTypes = ExcursionTypeResource::collection(ExcursionType::all())->resolve();
 
         $reservations = Reservation::where('booker_id', auth()->user()->id);
@@ -41,11 +41,15 @@ class BookerReservationsController extends Controller
             $query->where('excursion_type_id',  $request->excursionType);
         });
 
-        $reservations = $reservations->paginate(50);
+        $reservations = $reservations->orderBy('created_at', 'desc')->paginate(50);
 
         $totalPrice = $reservations->sum('price');
         $totalSeats = $reservations->sum('seats');
 
-        return view('booker.my-reservations', compact('reservations', 'excursionType', 'startDate', 'endDate', 'totalPrice', 'totalSeats', 'excursionTypes'));
+        return view('booker.my-reservations.index', compact('reservations', 'excursionType', 'startDate', 'endDate', 'totalPrice', 'totalSeats', 'excursionTypes'));
+    }
+
+    public function show(Request $request, Reservation $reservation){
+        return view('booker.my-reservations.show', compact('reservation'));
     }
 }

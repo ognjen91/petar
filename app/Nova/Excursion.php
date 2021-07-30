@@ -91,12 +91,13 @@ class Excursion extends Resource
             Number::make('Ukupan broj mjesta', 'total_seats'),
             ExcursionFreeSeats::make('Broj slobodnih mjesta')
                               ->passToVueComponent($this->freeSeats)
-                              ->onlyOnIndex(),
+                              ->exceptOnForms(),
             DateTime::make('Polazak', 'departure'),
 
 
             HasMany::make('Rezervacije', 'reservations', 'App\Nova\Reservation'),
-            BelongsTo::make('Izlet', 'excursionType', 'App\Nova\ExcursionType')
+            BelongsTo::make('Izlet', 'excursionType', 'App\Nova\ExcursionType'),
+            HasMany::make('Istorija promjene broja mjesta', 'seatChangeHistories', 'App\Nova\SeatChangeHistory')->readonly(optional($this->resource)),
 
         ];
 

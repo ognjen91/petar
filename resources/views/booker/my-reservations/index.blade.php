@@ -26,25 +26,34 @@
         </div>
             
         
-        @if($reservations->count())
+        @if($reservations->total())
             <table id="my-reservations">
                 <tr>
                     @if(!$excursionType)<th>Izlet</th>@endif
                     <th>Datum</th>
                     <th>Mjesta</th>
                     <th>Naplaćeno</th>
+                    <th>Detalji</th>
                 </tr>
                 @foreach ($reservations as $reservation)
-                    <tr>
-                        @if(!$excursionType)<td>{{$reservation->excursion->excursionType->name}}</td>@endif
+                    <tr @class(['red--text' => !$reservation->active])>
+                        @if(!$excursionType)<td><a href="{{route('my-reservations.show', $reservation->id)}}" @class(['red--text' => !$reservation->active])>{{$reservation->excursion->excursionType->name}}</a></td>@endif
                         <td>{{\Carbon\Carbon::parse($reservation->excursion->departure)->format('d.m.Y')}}</td>
                         <td>{{$reservation->seats}}</td>
                         <td>{{$reservation->price}}</td>
+                        <td>
+                            <v-btn
+                            elevation="2"
+                            small
+                            >
+                                <a href="{{route('my-reservations.show', $reservation->id)}}">Detalji</a>
+                            </v-btn>
+                        </td>
                     </tr>
                 @endforeach
                 <tr>
                     @if(!$excursionType)<td></td>@endif
-                    <td></td>
+                    <td>Ukupno <br> <strong>{{$reservations->total()}}</strong></td>
                     <td>Ukupno <br> <strong>{{$totalSeats}}</strong></td>
                     <td>Ukupno <br> <strong>{{$totalPrice}}</strong></td>
                 </tr>

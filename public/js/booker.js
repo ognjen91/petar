@@ -2038,8 +2038,12 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref2.data;
         _this3.showSuccessDialog = true;
       })["catch"](function (error) {
-        _this3.showErrorDialog = true;
-        if (error.response.status === 501) _this3.error = error.response.data.status;
+        if (error.response.status === 501) {
+          _this3.showErrorDialog = true;
+          _this3.error = error.response.data.status;
+        } else {
+          alert('Došlo je do greške');
+        }
       });
     }
   },
@@ -2168,6 +2172,118 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.startDate = this.initialStartDate;
     this.endDate = this.initialEndDate;
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/CancelReservationButton.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/CancelReservationButton.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ErrorDialog__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ErrorDialog */ "./resources/js/Components/Booker/ErrorDialog.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    ErrorDialog: _ErrorDialog__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  props: {
+    reservationId: {
+      Type: Number,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      showConfirmDialog: false,
+      reservationCanceled: false,
+      confirmText: 'Da li ste sigurni da želite da otkažete rezervaciju?',
+      successText: 'Rezervacija je uspješno otkazana. Stranica će se osvježiti.',
+      showErrorDialog: false,
+      error: ""
+    };
+  },
+  methods: {
+    cancelReservation: function cancelReservation() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default().post("/cancel-reservation/".concat(this.reservationId)).then(function (_ref) {
+        var data = _ref.data;
+        _this.reservationCanceled = true;
+        setTimeout(function () {
+          location.reload();
+        }, 3000);
+      })["catch"](function (error) {
+        if (error.response.status === 501) {
+          _this.showErrorDialog = true;
+          _this.error = error.response.data.status;
+        } else {
+          alert('Došlo je do greške');
+        }
+      });
+    }
   }
 });
 
@@ -2390,6 +2506,127 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/Footer.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/Footer.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      links: []
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/NavigationDrawer.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/NavigationDrawer.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    bookersName: {
+      Type: String,
+      required: false,
+      "default": 'Booker'
+    }
+  },
+  data: function data() {
+    return {
+      drawer: null,
+      items: [{
+        title: 'Početna',
+        link: '/'
+      }, {
+        title: 'Moje rezervacije',
+        link: '/moje-rezervacije'
+      }]
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/StationSelect.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/StationSelect.vue?vue&type=script&lang=js& ***!
@@ -2524,6 +2761,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Booker_DatePicker_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Components/Booker/DatePicker.vue */ "./resources/js/Components/Booker/DatePicker.vue");
 /* harmony import */ var _Components_Booker_ExcursionTypeSelect_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Components/Booker/ExcursionTypeSelect.vue */ "./resources/js/Components/Booker/ExcursionTypeSelect.vue");
 /* harmony import */ var _Components_Booker_BookerRedirectParamsSelect_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Components/Booker/BookerRedirectParamsSelect.vue */ "./resources/js/Components/Booker/BookerRedirectParamsSelect.vue");
+/* harmony import */ var _Components_Booker_CancelReservationButton_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Components/Booker/CancelReservationButton.vue */ "./resources/js/Components/Booker/CancelReservationButton.vue");
+/* harmony import */ var _Components_Booker_NavigationDrawer_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Components/Booker/NavigationDrawer.vue */ "./resources/js/Components/Booker/NavigationDrawer.vue");
+/* harmony import */ var _Components_Booker_Footer_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Components/Booker/Footer.vue */ "./resources/js/Components/Booker/Footer.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
  // window.Vue = require('vue').default;
@@ -2539,10 +2779,16 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_3__.default.Store(_store_booker_st
 
 
 
+
+
+
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('booker-application', _BookerApplication_vue__WEBPACK_IMPORTED_MODULE_4__.default);
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('date-picker', _Components_Booker_DatePicker_vue__WEBPACK_IMPORTED_MODULE_5__.default);
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('excursion-type-select', _Components_Booker_ExcursionTypeSelect_vue__WEBPACK_IMPORTED_MODULE_6__.default);
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('booker-redirect-params-select', _Components_Booker_BookerRedirectParamsSelect_vue__WEBPACK_IMPORTED_MODULE_7__.default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('cancel-reservation-button', _Components_Booker_CancelReservationButton_vue__WEBPACK_IMPORTED_MODULE_8__.default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('navigation-drawer', _Components_Booker_NavigationDrawer_vue__WEBPACK_IMPORTED_MODULE_9__.default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('booker-footer', _Components_Booker_Footer_vue__WEBPACK_IMPORTED_MODULE_10__.default);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0__.default({
   el: '#app',
   store: store,
@@ -20167,6 +20413,45 @@ component.options.__file = "resources/js/Components/Booker/BookerRedirectParamsS
 
 /***/ }),
 
+/***/ "./resources/js/Components/Booker/CancelReservationButton.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/Components/Booker/CancelReservationButton.vue ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CancelReservationButton_vue_vue_type_template_id_a791a714___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CancelReservationButton.vue?vue&type=template&id=a791a714& */ "./resources/js/Components/Booker/CancelReservationButton.vue?vue&type=template&id=a791a714&");
+/* harmony import */ var _CancelReservationButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CancelReservationButton.vue?vue&type=script&lang=js& */ "./resources/js/Components/Booker/CancelReservationButton.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _CancelReservationButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _CancelReservationButton_vue_vue_type_template_id_a791a714___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CancelReservationButton_vue_vue_type_template_id_a791a714___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/Booker/CancelReservationButton.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Components/Booker/DatePicker.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/Components/Booker/DatePicker.vue ***!
@@ -20323,6 +20608,84 @@ component.options.__file = "resources/js/Components/Booker/ExcursionsOnTheDateWi
 
 /***/ }),
 
+/***/ "./resources/js/Components/Booker/Footer.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/Components/Booker/Footer.vue ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Footer_vue_vue_type_template_id_e823eb4e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Footer.vue?vue&type=template&id=e823eb4e& */ "./resources/js/Components/Booker/Footer.vue?vue&type=template&id=e823eb4e&");
+/* harmony import */ var _Footer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Footer.vue?vue&type=script&lang=js& */ "./resources/js/Components/Booker/Footer.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _Footer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _Footer_vue_vue_type_template_id_e823eb4e___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Footer_vue_vue_type_template_id_e823eb4e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/Booker/Footer.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Components/Booker/NavigationDrawer.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/Components/Booker/NavigationDrawer.vue ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _NavigationDrawer_vue_vue_type_template_id_ba598f3a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NavigationDrawer.vue?vue&type=template&id=ba598f3a& */ "./resources/js/Components/Booker/NavigationDrawer.vue?vue&type=template&id=ba598f3a&");
+/* harmony import */ var _NavigationDrawer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NavigationDrawer.vue?vue&type=script&lang=js& */ "./resources/js/Components/Booker/NavigationDrawer.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _NavigationDrawer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _NavigationDrawer_vue_vue_type_template_id_ba598f3a___WEBPACK_IMPORTED_MODULE_0__.render,
+  _NavigationDrawer_vue_vue_type_template_id_ba598f3a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/Booker/NavigationDrawer.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Components/Booker/StationSelect.vue":
 /*!**********************************************************!*\
   !*** ./resources/js/Components/Booker/StationSelect.vue ***!
@@ -20433,6 +20796,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/Booker/CancelReservationButton.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/Components/Booker/CancelReservationButton.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CancelReservationButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CancelReservationButton.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/CancelReservationButton.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CancelReservationButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/Components/Booker/DatePicker.vue?vue&type=script&lang=js&":
 /*!********************************************************************************!*\
   !*** ./resources/js/Components/Booker/DatePicker.vue?vue&type=script&lang=js& ***!
@@ -20494,6 +20873,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExcursionsOnTheDateWithEnoughSeats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ExcursionsOnTheDateWithEnoughSeats.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/ExcursionsOnTheDateWithEnoughSeats.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExcursionsOnTheDateWithEnoughSeats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/Components/Booker/Footer.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/Components/Booker/Footer.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Footer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Footer.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/Footer.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Footer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/Components/Booker/NavigationDrawer.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/Components/Booker/NavigationDrawer.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NavigationDrawer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NavigationDrawer.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/NavigationDrawer.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NavigationDrawer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -20559,6 +20970,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookerRedirectParamsSelect_vue_vue_type_template_id_0a5e005c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookerRedirectParamsSelect_vue_vue_type_template_id_0a5e005c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BookerRedirectParamsSelect.vue?vue&type=template&id=0a5e005c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/BookerRedirectParamsSelect.vue?vue&type=template&id=0a5e005c&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/Booker/CancelReservationButton.vue?vue&type=template&id=a791a714&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/Components/Booker/CancelReservationButton.vue?vue&type=template&id=a791a714& ***!
+  \***************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CancelReservationButton_vue_vue_type_template_id_a791a714___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CancelReservationButton_vue_vue_type_template_id_a791a714___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CancelReservationButton_vue_vue_type_template_id_a791a714___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CancelReservationButton.vue?vue&type=template&id=a791a714& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/CancelReservationButton.vue?vue&type=template&id=a791a714&");
 
 
 /***/ }),
@@ -20631,6 +21059,40 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/Booker/Footer.vue?vue&type=template&id=e823eb4e&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/Components/Booker/Footer.vue?vue&type=template&id=e823eb4e& ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Footer_vue_vue_type_template_id_e823eb4e___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Footer_vue_vue_type_template_id_e823eb4e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Footer_vue_vue_type_template_id_e823eb4e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Footer.vue?vue&type=template&id=e823eb4e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/Footer.vue?vue&type=template&id=e823eb4e&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/Booker/NavigationDrawer.vue?vue&type=template&id=ba598f3a&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/Components/Booker/NavigationDrawer.vue?vue&type=template&id=ba598f3a& ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NavigationDrawer_vue_vue_type_template_id_ba598f3a___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NavigationDrawer_vue_vue_type_template_id_ba598f3a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NavigationDrawer_vue_vue_type_template_id_ba598f3a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NavigationDrawer.vue?vue&type=template&id=ba598f3a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/NavigationDrawer.vue?vue&type=template&id=ba598f3a&");
+
+
+/***/ }),
+
 /***/ "./resources/js/Components/Booker/StationSelect.vue?vue&type=template&id=39e370fc&":
 /*!*****************************************************************************************!*\
   !*** ./resources/js/Components/Booker/StationSelect.vue?vue&type=template&id=39e370fc& ***!
@@ -20687,6 +21149,7 @@ var render = function() {
     [
       _c(
         "v-row",
+        { staticClass: "mt-4" },
         [
           _c("v-col", { attrs: { cols: "12" } }, [
             _c("h1", { staticClass: "text-center blue--text" }, [
@@ -20726,7 +21189,7 @@ var render = function() {
             [
               _c("div", { staticClass: "mb-3" }, [
                 _c("label", { attrs: { for: "seats" } }, [
-                  _vm._v("Broj mjesta")
+                  _c("strong", [_vm._v("Broj mjesta")])
                 ]),
                 _c("br"),
                 _vm._v(" "),
@@ -20759,7 +21222,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", {}, [
                 _c("label", { attrs: { for: "price" } }, [
-                  _vm._v("Naplaćeni iznos")
+                  _c("strong", [_vm._v("Naplaćeni iznos")])
                 ]),
                 _c("br"),
                 _vm._v(" "),
@@ -20775,7 +21238,7 @@ var render = function() {
                   attrs: {
                     id: "price",
                     type: "number",
-                    placeholder: "",
+                    placeholder: "iznos u evrima",
                     min: "0",
                     step: "0.1"
                   },
@@ -20824,7 +21287,6 @@ var render = function() {
             "v-col",
             { attrs: { cols: "12" } },
             [
-              _vm.showBookBtn &&
               _vm.price &&
               _vm.seats &&
               _vm.selectedExcursionId &&
@@ -21026,6 +21488,129 @@ var render = function() {
         ],
         1
       )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/CancelReservationButton.vue?vue&type=template&id=a791a714&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/CancelReservationButton.vue?vue&type=template&id=a791a714& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: { width: "500" },
+          scopedSlots: _vm._u([
+            {
+              key: "activator",
+              fn: function() {
+                return [
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass: "white--text",
+                      attrs: { elevation: "2", large: "", color: "red" },
+                      on: {
+                        click: function($event) {
+                          _vm.showConfirmDialog = true
+                        }
+                      }
+                    },
+                    [_vm._v("\n            Otkažite rezervaciju\n            ")]
+                  )
+                ]
+              },
+              proxy: true
+            }
+          ]),
+          model: {
+            value: _vm.showConfirmDialog,
+            callback: function($$v) {
+              _vm.showConfirmDialog = $$v
+            },
+            expression: "showConfirmDialog"
+          }
+        },
+        [
+          _vm._v(" "),
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-card-title",
+                { staticClass: "text-h5 red lighten-2 mb-5 white--text" },
+                [_vm._v("\n        Otkazivanje rezervacije\n        ")]
+              ),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "\n        " +
+                    _vm._s(
+                      !_vm.reservationCanceled
+                        ? _vm.confirmText
+                        : _vm.successText
+                    ) +
+                    "\n        "
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  !_vm.reservationCanceled
+                    ? _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "primary", text: "" },
+                          on: { click: _vm.cancelReservation }
+                        },
+                        [_vm._v("\n        I accept\n        ")]
+                      )
+                    : _vm._e()
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("ErrorDialog", {
+        attrs: { show: _vm.showErrorDialog, error: _vm.error },
+        on: {
+          closeErrorDialog: function($event) {
+            _vm.showSuccessDialog = false
+          }
+        }
+      })
     ],
     1
   )
@@ -21268,6 +21853,169 @@ var render = function() {
             ]
           )
         }),
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/Footer.vue?vue&type=template&id=e823eb4e&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/Footer.vue?vue&type=template&id=e823eb4e& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-footer",
+    { staticClass: "mt-5", attrs: { color: "primary lighten-1", padless: "" } },
+    [
+      _c(
+        "v-row",
+        { attrs: { justify: "center", "no-gutters": "" } },
+        [
+          _c(
+            "v-col",
+            {
+              staticClass: "primary lighten-2 py-4 text-center white--text",
+              attrs: { cols: "12" }
+            },
+            [
+              _c("small", [
+                _vm._v(
+                  _vm._s(new Date().getFullYear()) + " © — Booking Mamma by "
+                ),
+                _c("strong", [
+                  _c("a", { attrs: { href: "http://osam.marekting" } }, [
+                    _vm._v("Osam Marketing")
+                  ])
+                ])
+              ])
+            ]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/NavigationDrawer.vue?vue&type=template&id=ba598f3a&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Components/Booker/NavigationDrawer.vue?vue&type=template&id=ba598f3a& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "absolute", staticStyle: { "z-index": "3" } },
+    [
+      _c("v-img", {
+        attrs: {
+          "max-height": "40",
+          "max-width": "40",
+          src: "/images/hamburger.png",
+          id: "nav-drawer-trigger"
+        },
+        on: {
+          click: function($event) {
+            $event.stopPropagation()
+            _vm.drawer = !_vm.drawer
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "v-navigation-drawer",
+        {
+          attrs: { absolute: "", temporary: "", id: "the-drawer" },
+          model: {
+            value: _vm.drawer,
+            callback: function($$v) {
+              _vm.drawer = $$v
+            },
+            expression: "drawer"
+          }
+        },
+        [
+          _c(
+            "v-list-item",
+            [
+              _c(
+                "v-list-item-content",
+                [
+                  _c("v-list-item-title", { staticClass: "blue--text" }, [
+                    _vm._v("Brodovi Petar Booking")
+                  ]),
+                  _vm._v(" "),
+                  _c("v-list-item-title", [
+                    _c("strong", [_vm._v(_vm._s(_vm.bookersName))])
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-divider"),
+          _vm._v(" "),
+          _c(
+            "v-list",
+            { attrs: { dense: "" } },
+            _vm._l(_vm.items, function(item) {
+              return _c(
+                "v-list-item",
+                { key: item.title, attrs: { link: "" } },
+                [
+                  _c("v-list-item-content", [
+                    _c(
+                      "a",
+                      { attrs: { href: item.link } },
+                      [_c("v-list-item-title", [_vm._v(_vm._s(item.title))])],
+                      1
+                    )
+                  ])
+                ],
+                1
+              )
+            }),
+            1
+          )
+        ],
         1
       )
     ],

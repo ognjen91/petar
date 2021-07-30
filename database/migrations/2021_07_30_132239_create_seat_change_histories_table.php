@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReservationsTable extends Migration
+class CreateSeatChangeHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateReservationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservations', function (Blueprint $table) {
+        Schema::create('seat_change_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('booker_id');
             $table->unsignedBigInteger('excursion_id');
-            $table->unsignedBigInteger('seats');
-            $table->unsignedBigInteger('station_id');
-            $table->unsignedFloat('price');
-            $table->boolean('active')->default(1);
-            $table->dateTime('cancelation_time')->nullable();
+            $table->foreign('excursion_id')->references('id')->on('excursions')->onDelete('cascade');
+            $table->unsignedBigInteger('seats_old_value');
+            $table->unsignedBigInteger('seats_new_value');
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ class CreateReservationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservations');
+        Schema::dropIfExists('seat_change_histories');
     }
 }

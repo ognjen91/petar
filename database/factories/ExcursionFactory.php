@@ -24,7 +24,7 @@ class ExcursionFactory extends Factory
     {
         return [
             'excursion_type_id' => 1,
-            'departure' => $this->faker->dateTimeBetween($startDate = '-15 days', $endDate = 'now'),
+            'departure' => $this->faker->dateTimeBetween($startDate = '-1 days', $endDate = '+5 days'),
             'total_seats' => rand(30,60)
         ];
     }

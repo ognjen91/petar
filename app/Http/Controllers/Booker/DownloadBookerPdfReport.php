@@ -51,9 +51,10 @@ class DownloadBookerPdfReport extends Controller
             $query->where('departure', '<=', $endDate);
         });
 
+        $totalPrice = $reservations->active()->get()->sum('price');
+        $totalSeats = $reservations->active()->get()->sum('seats');
+        
         $reservations = $reservations->get();
-        $totalPrice = $reservations->sum('price');
-        $totalSeats = $reservations->sum('seats');
         // =====PREPARE PDF DATA END=====
 
         //Clear session data related to booker!
@@ -66,6 +67,6 @@ class DownloadBookerPdfReport extends Controller
 
         $data = compact('booker', 'excursionType', 'formatedStartDate', 'formatedEndDate', 'reservations', 'totalPrice', 'totalSeats');
         $pdf = \PDF::loadView('pdf.booker-report', $data);
-        return $pdf->download('petar-report.pdf');
+        return $pdf->download(Carbon::now()->format('d_m_Y-') .' petar-report.pdf' );
     }
 }

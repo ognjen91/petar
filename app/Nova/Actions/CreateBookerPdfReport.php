@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Builder;
 class CreateBookerPdfReport extends Action
 {
     use InteractsWithQueue, Queueable;
+    public $name = "Kreirajte pdf izvještaj za bukera";
 
     /**
      * Perform the action on the given models.

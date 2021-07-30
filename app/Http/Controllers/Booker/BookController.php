@@ -13,9 +13,9 @@ class BookController extends Controller
 
         // selectedExcursionId : this.selectedExcursionId,
         // seats : this.seats
-        return response()->json([
-            'status' => 'Greška! Broj slobodnih mjesta je u međuvremenu smanjen. Molimo da odaberete drugi broj i pokušate ponovo'
-        ], 501); 
+        // return response()->json([
+        //     'status' => 'Greška! Broj slobodnih mjesta je u međuvremenu smanjen. Molimo da odaberete drugi broj i pokušate ponovo'
+        // ], 501); 
 
         $excursion = Excursion::find($request->selectedExcursionId);
         if($excursion->freeSeats < $request->seats){
