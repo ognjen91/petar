@@ -5,30 +5,24 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Select;
-
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Text;
 
-use App\Nova\Actions\CreateExcursionsOfTypeInDateRange;
-
-
-class ExcursionType extends Resource
+class Role extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\ExcursionType::class;
+    public static $model =  \Spatie\Permission\Models\Role::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -44,9 +38,9 @@ class ExcursionType extends Resource
      * @return [String]
      */    
     
-     public static function availableForNavigation(Request $request)
+    public static function availableForNavigation(Request $request)
     {
-        return true;
+        return auth()->user()->isSuperAdmin;
     }
 
     /**
@@ -56,7 +50,7 @@ class ExcursionType extends Resource
 
     public static function label()
     {
-        return 'Tipovi izleta';
+        return 'Uloge';
     }
 
     /**
@@ -66,10 +60,8 @@ class ExcursionType extends Resource
 
     public static function singularLabel()
     {
-        return 'Tip izleta';
+        return 'Uloga';
     }
-
-
 
     /**
      * Get the fields displayed by the resource.
@@ -81,13 +73,8 @@ class ExcursionType extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Ime izleta', 'name'),
-            Select::make('Tip izleta', 'type')->options([
-                'regular' => 'Regularni izleti',
-                'private' => 'Privatni izleti',
-            ]),
-            HasMany::make('Aktivni izleti ovog tipa', 'excursions', 'App\Nova\Excursion'),
-            BelongsToMany::make('Stanice', 'stations', 'App\Nova\Station')
+            Text::make('Ime uloge', 'name'),
+            BelongsToMany::make('Korisnik', 'users', '\App\Nova\User')
         ];
     }
 
@@ -132,8 +119,6 @@ class ExcursionType extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-            new CreateExcursionsOfTypeInDateRange
-        ];
+        return [];
     }
 }

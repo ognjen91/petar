@@ -20,7 +20,7 @@ use App\Http\Controllers\Booker\ReservationCancelationController;
 */
 
 
-Route::domain('booker.petar-booking.test')->group(function () {
+Route::domain(config('app.booker_subdomain'))->group(function () {
     Route::get('/', BookerHomepageController::class)->middleware('auth');
     Route::post('/check-excursions-on-date', CheckExcursionsForDateAndTypeController::class)->middleware('auth');
     Route::get('/moje-rezervacije', [BookerReservationsController::class, 'index'])->name('my-reservations.index')->middleware('auth');

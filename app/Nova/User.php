@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Text;
 
 use Laravel\Nova\Fields\HasMany;
 use App\Nova\Actions\CreateBookerPdfReport;
+use Laravel\Nova\Fields\BelongsToMany;
 
 
 class User extends Resource
@@ -66,7 +67,7 @@ class User extends Resource
      */
     public function fields(Request $request)
     {
-        return [
+        $fields = [
             ID::make()->sortable(),
             
             Gravatar::make()->maxWidth(50),
@@ -87,9 +88,14 @@ class User extends Resource
             ->updateRules('nullable', 'string', 'min:8'),
 
             
-            HasMany::make('Rezervacije', 'reservations', 'App\Nova\Reservation'),
+
         ];
 
+        if(auth()->user()->isSuperAdmin) $fields[] = BelongsToMany::make('Uloga', 'roles', '\App\Nova\Role');
+        $fields[] = HasMany::make('Rezervacije', 'reservations', 'App\Nova\Reservation');
+
+
+        return $fields;
     }
 
     /**

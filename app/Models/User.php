@@ -42,6 +42,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected static function boot() {
+
+        parent::boot();
+        
+        // DEFAULT ROLE
+        static::created(function ($user) {
+            $user->assignRole('Booker');
+        });
+    }
+
 
 
     /**

@@ -53,6 +53,14 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'booker_subdomain' => env('BOOKER_SUBDOMAIN', 'booker.petar-booking.test'),
+    'superadmin_name' => env('SUPERADMIN_NAME', 'Osam Marketing'),
+    'superadmin_email' => env('SUPERADMIN_EMAIL', 'qzman16@gmail.com'),
+    'superadmin_password' => env('SUPERADMIN_PASSOWRD', '12345678'),
+    'admin_name' => env('ADMIN_NAME', 'Petar Admin'),
+    'admin_email' => env('ADMIN_EMAIL', '16minus8@gmail.com'),
+    'admin_password' => env('ADMIN_PASSWORD', '12345678'),
+    'seed_all' => env('SEED_ALL', 1),
 
     'asset_url' => env('ASSET_URL', null),
 

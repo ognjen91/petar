@@ -40,20 +40,23 @@ class DatabaseSeeder extends Seeder
         
         $superAdmin = User::factory()->create(
             [
-                'name' => 'Ognjen K',
-                'email' => 'qzman16@gmail.com',
-                'password' => bcrypt(12345678)
+                'name' => config('app.superadmin_name'),
+                'email' => config('app.superadmin_email'),
+                'password' => config('app.superadmin_password')
             ]
         );
             
         $admin = User::factory()->create(
             [
-                'name' => 'Stefan Š',
-                'email' => '16minus8@gmail.com',
-                'password' => bcrypt(12345678)
+                'name' => config('app.admin_name'),
+                'email' => config('app.admin_email'),
+                'password' => config('app.admin_password'),
             ]
         );
             
+        $superAdmin->assignRole('Super Admin');
+        $admin->assignRole('Admin');
+
         $booker1 = User::factory()->create(
             [
                 'name' => 'John Doe 1',
@@ -72,6 +75,23 @@ class DatabaseSeeder extends Seeder
 
         $superAdmin->assignRole('Super Admin');
         $admin->assignRole('Admin');
+
+        $booker1 = User::factory()->create(
+            [
+                'name' => 'John Doe 1',
+                'email' => 'petarbooker1@gmail.com',
+                'password' => bcrypt(12345678)
+            ]
+        );
+
+        $booker2 = User::factory()->create(
+            [
+                'name' => 'John Doe 2',
+                'email' => 'petarbooker2@gmail.com',
+                'password' => bcrypt(12345678)
+            ]
+        );
+
         $booker1->assignRole('Booker');
         $booker2->assignRole('Booker');
 
