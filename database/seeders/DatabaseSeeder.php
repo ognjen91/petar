@@ -57,6 +57,8 @@ class DatabaseSeeder extends Seeder
         $superAdmin->assignRole('Super Admin');
         $admin->assignRole('Admin');
 
+        if(!config('app.seed_all')) return;
+
         $booker1 = User::factory()->create(
             [
                 'name' => 'John Doe 1',
@@ -73,8 +75,6 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        $superAdmin->assignRole('Super Admin');
-        $admin->assignRole('Admin');
 
         $booker1 = User::factory()->create(
             [
