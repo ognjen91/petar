@@ -19,7 +19,10 @@
     <body class="">
         <v-app id="app" class=''>
             @auth
-                <navigation-drawer bookers-name="{{auth()->user()->name}}"></navigation-drawer>
+                <navigation-drawer 
+                bookers-name="{{auth()->user()->name}}"
+                logout-route="{{route('logout')}}"
+                ></navigation-drawer>
             @endauth
             {{ $slot }}
             <booker-footer></booker-footer>

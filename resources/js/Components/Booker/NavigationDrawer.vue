@@ -35,6 +35,7 @@
                   <a :href="item.link">
                     <v-list-item-title>{{ item.title }}</v-list-item-title>
                   </a>
+                    <v-list-item-title @click="logout">Logout</v-list-item-title>
               </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -44,12 +45,19 @@
 
 
 <script>
+import axios from 'axios'
+
   export default {
     props : {
         bookersName : {
             Type : String,
             required : false,
             default : 'Booker'
+        },
+        logoutRoute : {
+            Type : String,
+            required : false,
+            default : '/logout'
         }
     },
 
@@ -63,5 +71,15 @@
         ],
       }
     },
+
+    methods : {
+      logout(){
+            axios.post(this.logoutRoute).then((resp) => {
+                setTimeout(()=>{
+                    location.reload();
+                }, 1000)
+            })
+      }
+    }
   }
 </script>
