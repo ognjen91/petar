@@ -82,6 +82,7 @@ class ExcursionType extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make('Ime izleta', 'name'),
+            Text::make('Slug', 'slug'),
             Select::make('Tip izleta', 'type')->options([
                 'regular' => 'Regularni izleti',
                 'private' => 'Privatni izleti',
