@@ -91,8 +91,8 @@ class User extends Resource
 
         ];
 
-        if(auth()->user()->isSuperAdmin) $fields[] = BelongsToMany::make('Uloga', 'roles', '\App\Nova\Role');
         $fields[] = HasMany::make('Rezervacije', 'reservations', 'App\Nova\Reservation');
+        if(auth()->user()->isSuperAdmin) $fields[] = BelongsToMany::make('Uloga', 'roles', '\App\Nova\Role');
 
 
         return $fields;
