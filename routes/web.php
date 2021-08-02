@@ -29,7 +29,7 @@ Route::domain(config('app.booker_subdomain'))->group(function () {
     Route::post('/cancel-reservation/{reservation}', ReservationCancelationController::class)->middleware('auth');
 });
 
-Route::domain('booker.petar-booking.test')->group(function () {
+Route::domain(config('app.booker_subdomain'))->group(function () {
     require __DIR__.'/auth.php';
 });
 
