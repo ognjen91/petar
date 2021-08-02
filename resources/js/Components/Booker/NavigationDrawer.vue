@@ -38,8 +38,8 @@
               </v-list-item-content>
         </v-list-item>
         <v-list-item>
-              <v-list-item-content>
-                    <v-list-item-title @click="logout">Logout</v-list-item-title>
+              <v-list-item-content  @click="logout">
+                    <v-list-item-title>Logout</v-list-item-title>
               </v-list-item-content>
         </v-list-item>
       </v-list>
