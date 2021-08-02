@@ -18,7 +18,9 @@
     </head>
     <body class="">
         <v-app id="app" class=''>
-            <navigation-drawer bookers-name="{{auth()->user()->name}}"></navigation-drawer>
+            @auth
+                <navigation-drawer bookers-name="{{auth()->user()->name}}"></navigation-drawer>
+            @endauth
             {{ $slot }}
             <booker-footer></booker-footer>
         </v-app>
