@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => config('app.superadmin_name'),
                 'email' => config('app.superadmin_email'),
-                'password' => config('app.superadmin_password')
+                'password' => bcrypt(config('app.superadmin_password'))
             ]
         );
             
@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => config('app.admin_name'),
                 'email' => config('app.admin_email'),
-                'password' => config('app.admin_password'),
+                'password' => bcrypt(config('app.admin_password')),
             ]
         );
             
