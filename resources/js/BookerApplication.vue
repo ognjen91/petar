@@ -182,6 +182,9 @@ export default {
                 price : this.price
             }).then(({data}) => {
                 this.showSuccessDialog = true
+                setTimeout(()=>{
+                    location.reload();
+                }, 4000)
             })
             .catch((error) => {
                 if(error.response.status === 501){

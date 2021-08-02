@@ -18,7 +18,7 @@
 
 
         <v-list-item-content>
-          <v-list-item-title class='blue--text'>Brodovi Petar Booking</v-list-item-title>
+          <v-list-item-title class='blue--text'>Booking Mamma : Brodovi Petar</v-list-item-title>
           <v-list-item-title><strong>{{bookersName}}</strong></v-list-item-title>
         </v-list-item-content>
       </v-list-item>
