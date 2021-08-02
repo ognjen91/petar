@@ -2,6 +2,8 @@
     <v-container class="grey lighten-5">
         <v-row class='mt-4'>
             <v-col cols="12" class="">
+                
+                <p class='text-center blue--text mb-0'>Booking Mama &copy;</p>
                 <h1 class='text-center blue--text'>Petar Boats Booking</h1>
             </v-col>
         </v-row>
