@@ -35,6 +35,10 @@
                   <a :href="item.link">
                     <v-list-item-title>{{ item.title }}</v-list-item-title>
                   </a>
+              </v-list-item-content>
+        </v-list-item>
+        <v-list-item>
+              <v-list-item-content>
                     <v-list-item-title @click="logout">Logout</v-list-item-title>
               </v-list-item-content>
         </v-list-item>
