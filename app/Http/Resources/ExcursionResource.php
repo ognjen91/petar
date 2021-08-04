@@ -18,7 +18,8 @@ class ExcursionResource extends JsonResource
         return [
             'id' => $this->id,
             'departure' => Carbon::parse($this->departure)->format('H:i'),
-            'freeSeats' => $this->freeSeats
+            'freeSeats' => $this->freeSeats,
+            'childSeats' => $this->total_child_seats
         ];
     }
 }

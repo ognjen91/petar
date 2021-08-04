@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 
@@ -45,14 +46,22 @@ class Reservation extends Resource
         'id',
     ];
 
+    
+    /**
+     * PAGINATION
+     */
+    public static $perPageOptions = [10, 20, 50, 100];
+
+
     /**
      * [label in the admin panel]
      * @return [String]
      */
 
+
     public static function label()
     {
-        return 'Rezervacije';
+        return 'Rezervacije redovnih';
     }
 
     /**
@@ -62,7 +71,7 @@ class Reservation extends Resource
 
     public static function singularLabel()
     {
-        return 'Rezervacija';
+        return 'Rezervacija redovnih';
     }
 
 
@@ -77,12 +86,13 @@ class Reservation extends Resource
     {
         return [
             // ID::make(__('ID'), 'id')->sortable(),
-            BelongsTo::make('Izlet', 'excursion', 'App\Nova\Excursion'),
-            Text::make('Broj mjesta', 'seats'),
-            Text::make('Naplaćena cijena', 'price'),
-            BelongsTo::make('Stanica', 'station', 'App\Nova\Station'),
-            BelongsTo::make('Buker', 'booker', 'App\Nova\User'),
-            Boolean::make('Status', 'active')->readonly()
+            BelongsTo::make('Izlet', 'excursion', 'App\Nova\Excursion')->readonly(),
+            Text::make('Broj mjesta', 'seats')->readonly(),
+            Text::make('Naplaćena cijena', 'price')->readonly(),
+            BelongsTo::make('Stanica', 'station', 'App\Nova\Station')->readonly()->sortable(),
+            BelongsTo::make('Buker', 'booker', 'App\Nova\User')->readonly()->sortable(),
+            Boolean::make('Status', 'active')->readonly(),
+            Textarea::make('Dodatna poruka', 'message')->readonly()
         ];
     }
 

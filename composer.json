@@ -18,7 +18,8 @@
         "laravel/nova": "*",
         "laravel/tinker": "^2.5",
         "petar/excursion-free-seats": "*",
-        "spatie/laravel-permission": "^4.2"
+        "spatie/laravel-permission": "^4.2",
+        "petar/excursion-recapitulation": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -73,6 +74,10 @@
         {
             "type": "path",
             "url": "./nova-components/ExcursionFreeSeats"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/ExcursionRecapitulation"
         }
     ]
 }

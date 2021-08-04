@@ -62,6 +62,12 @@ export default {
         reservationId : {
             Type : Number,
             required : true
+        },
+        excursionType : {
+            Type : String,
+            required : false,
+            default : 'regular',
+            validator: val => ['regular', 'private'].includes(val)
         }
     },
 
@@ -79,7 +85,9 @@ export default {
     methods : {
         cancelReservation(){
 
-            axios.post(`/cancel-reservation/${this.reservationId}`)
+            axios.post(`/cancel-reservation/${this.reservationId}`, {
+                excursion_type : this.excursionType
+            })
             .then(({data}) => {
                 this.reservationCanceled = true
                 setTimeout(()=>{

@@ -42,8 +42,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected static function boot() {
-
+    protected static function boot()
+    {
         parent::boot();
         
         // DEFAULT ROLE
@@ -58,16 +58,23 @@ class User extends Authenticatable
      * RELATIONSHIPS
      */
 
-     public function reservations(){
-         return $this->hasMany(Reservation::class, 'booker_id');
-     }
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class, 'booker_id');
+    }
+        
+    public function privateExcursionReservations()
+    {
+        return $this->hasMany(PrivateExcursionReservation::class, 'booker_id');
+    }
 
 
     /**
      * ACCESSORS
      */
 
-    public function getIsSuperAdminAttribute($query){
+    public function getIsSuperAdminAttribute($query)
+    {
         return $this->hasRole('Super Admin');
     }
 }

@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Text;
 
 use Laravel\Nova\Fields\HasMany;
 use App\Nova\Actions\CreateBookerPdfReport;
+use App\Nova\Actions\CreateBookerPdfReportForPrivateExcursions;
 use Laravel\Nova\Fields\BelongsToMany;
 
 
@@ -91,7 +92,8 @@ class User extends Resource
 
         ];
 
-        $fields[] = HasMany::make('Rezervacije', 'reservations', 'App\Nova\Reservation');
+        $fields[] = HasMany::make('Rezervacije redovnih tura', 'reservations', 'App\Nova\Reservation');
+        $fields[] = HasMany::make('Rezervacije privatnih tura', 'privateExcursionReservations', 'App\Nova\PrivateExcursionReservation');
         if(auth()->user()->isSuperAdmin) $fields[] = BelongsToMany::make('Uloga', 'roles', '\App\Nova\Role');
 
 
@@ -140,7 +142,8 @@ class User extends Resource
     public function actions(Request $request)
     {
         return [
-            new CreateBookerPdfReport
+            new CreateBookerPdfReport,
+            new CreateBookerPdfReportForPrivateExcursions
         ];
     }
 }

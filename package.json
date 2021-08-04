@@ -9,7 +9,9 @@
         "prod": "npm run production",
         "production": "mix --production",
         "build-excursion-free-seats": "cd nova-components/ExcursionFreeSeats && npm run dev",
-        "build-excursion-free-seats-prod": "cd nova-components/ExcursionFreeSeats && npm run prod"
+        "build-excursion-free-seats-prod": "cd nova-components/ExcursionFreeSeats && npm run prod",
+        "build-excursion-recapitulation": "cd nova-components/ExcursionRecapitulation && npm run dev",
+        "build-excursion-recapitulation-prod": "cd nova-components/ExcursionRecapitulation && npm run prod"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.2.1",
@@ -30,8 +32,11 @@
         "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
+        "luxon": "^1.28.0",
         "vue": "^2.6.14",
+        "vue-datetime": "^1.0.0-beta.14",
         "vuetify": "^2.5.7",
-        "vuex": "^3.6.2"
+        "vuex": "^3.6.2",
+        "weekstart": "^1.1.0"
     }
 }

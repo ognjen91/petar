@@ -10,8 +10,30 @@ class Reservation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['booker_id', 'excursion_id', 'seats', 'station_id', 'price', 'active', 'cancelation_time'];
+    protected $fillable = [
+                            'booker_id', 
+                            'excursion_id', 
+                            'seats', 
+                            'station_id', 
+                            'price', 
+                            'active', 
+                            'cancelation_time',
+                            'child_seats',
+                            'message'
+                        ];
 
+    protected static function boot() {
+
+        parent::boot();
+        
+        // SAVE OLD VALUE OF SEATS
+        static::created(function ($reservation) {
+            if($reservation->child_seats){
+                $reservation->excursion->total_child_seats += $reservation->child_seats;
+                $reservation->excursion->save();
+            }
+        });
+    }
 
     /**
      * RELATIONSHIPS

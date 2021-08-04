@@ -58,6 +58,11 @@ import axios from 'axios'
             required : false,
             default : 'Booker'
         },
+        loginRoute : {
+            Type : String,
+            required : false,
+            default : '/logout'
+        },
         logoutRoute : {
             Type : String,
             required : false,
@@ -70,8 +75,11 @@ import axios from 'axios'
 
         drawer: null,
         items: [
-          { title: 'Početna', link: '/' },
-          { title: 'Moje rezervacije', link: '/moje-rezervacije' },
+          { title: 'Bukirajte redovnu turu', link: '/' },
+          { title: 'Kalendar privatnih tura', link: '/privatne-ture' },
+          { title: 'Nova privatna tura', link: '/privatne-ture/nova' },
+          { title: 'Moje rezervacije redovnih izleta', link: '/moje-rezervacije/redovni' },
+          { title: 'Moje rezervacije privatnih izleta', link: '/moje-rezervacije/privatni' },
         ],
       }
     },
@@ -80,7 +88,7 @@ import axios from 'axios'
       logout(){
             axios.post(this.logoutRoute).then((resp) => {
                 setTimeout(()=>{
-                    location.reload();
+                  window.location.href = this.loginRoute
                 }, 1000)
             })
       }

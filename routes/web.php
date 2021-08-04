@@ -2,12 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Booker\BookerHomepageController;
+use App\Http\Controllers\Crew\CrewHomepageController;
 use App\Http\Controllers\Booker\CheckExcursionsForDateAndTypeController;
 use App\Http\Controllers\Booker\BookController;
-use App\Http\Controllers\Booker\BookerReservationsController;
+use App\Http\Controllers\Booker\BookerRegularExcursionsReservationsController;
+use App\Http\Controllers\Booker\BookerPrivateExcursionsReservationsController;
+use App\Http\Controllers\Booker\PrivateExcursionsReservationController;
 use App\Http\Controllers\Booker\BookerPdfReportController;
 use App\Http\Controllers\Booker\DownloadBookerPdfReport;
 use App\Http\Controllers\Booker\ReservationCancelationController;
+use App\Http\Controllers\Crew\ExcursionStationReservationsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,20 +23,33 @@ use App\Http\Controllers\Booker\ReservationCancelationController;
 |
 */
 
-
-Route::domain(config('app.booker_subdomain'))->group(function () {
-    Route::get('/', BookerHomepageController::class)->middleware('auth');
-    Route::post('/check-excursions-on-date', CheckExcursionsForDateAndTypeController::class)->middleware('auth');
-    Route::get('/moje-rezervacije', [BookerReservationsController::class, 'index'])->name('my-reservations.index')->middleware('auth');
-    Route::get('/moje-rezervacije/{reservation}', [BookerReservationsController::class, 'show'])->name('my-reservations.show')->middleware('auth');
-    Route::post('/book', BookController::class)->middleware('auth');
-    Route::post('/cancel-reservation/{reservation}', ReservationCancelationController::class)->middleware('auth');
+// BOOKER ROUTES
+Route::domain(config('app.booker_subdomain'))
+->middleware(['auth', 'role:Booker'])
+->group(function () {
+    Route::get('/', BookerHomepageController::class)->name('booker.homepage');
+    Route::post('/check-excursions-on-date', CheckExcursionsForDateAndTypeController::class);
+    Route::get('/moje-rezervacije/redovni', [BookerRegularExcursionsReservationsController::class, 'index'])->name('my-reservations.regular.index');
+    Route::get('/moje-rezervacije/redovni/{reservation}', [BookerRegularExcursionsReservationsController::class, 'show'])->name('my-reservations.regular.show');
+    Route::get('/moje-rezervacije/privatni', [BookerPrivateExcursionsReservationsController::class, 'index'])->name('my-reservations.private.index');
+    Route::get('/moje-rezervacije/privatni/{reservation}', [BookerPrivateExcursionsReservationsController::class, 'show'])->name('my-reservations.private.show');
+    Route::get('privatne-ture', [PrivateExcursionsReservationController::class, 'index'])->name('private-excursions.index');
+    Route::get('privatne-ture/nova', [PrivateExcursionsReservationController::class, 'create'])->name('private-excursions.create');
+    Route::post('private-tours', [PrivateExcursionsReservationController::class, 'store'])->name('private-excursions.store');
+    Route::post('/book', BookController::class);
+    Route::post('/cancel-reservation/{reservation}', ReservationCancelationController::class);
 });
 
-Route::domain(config('app.booker_subdomain'))->group(function () {
-    require __DIR__.'/auth.php';
+// CREW ROUTES
+Route::domain(config('app.crew_subdomain'))
+->middleware(['auth', 'role:Crew Member'])
+->group(function () {
+    Route::get('/', CrewHomepageController::class)->name('crew.homepage');
+    Route::get('/{excursion}/{station}', ExcursionStationReservationsController::class)->name('crew.excursion-station.details');
 });
 
+// AUTH    
+require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     return view('welcome');
@@ -42,7 +59,8 @@ Route::get('/', function () {
 //TEST ROUTE
 Route::get('/booker', BookerPdfReportController::class);
 //ACTUAL DOWNLOAD ROUTE
-Route::get('/booker/pdf-download', DownloadBookerPdfReport::class)->name('booker-pdf-download');
+Route::get('/booker/pdf-download-regular-excursions', [DownloadBookerPdfReport::class, 'indexRegular'])->name('booker-pdf-download-regular-excursions');
+Route::get('/booker/pdf-download-private-excursions', [DownloadBookerPdfReport::class, 'indexPrivate'])->name('booker-pdf-download-private-excursions');
 
 
 

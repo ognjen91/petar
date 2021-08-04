@@ -9,6 +9,8 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Select;
 use App\Models\ExcursionType;
+use App\Models\Reservation;
+use App\Models\Station;
 use Carbon\Carbon;
 
 use Laravel\Nova\Fields\HasMany;
@@ -18,6 +20,7 @@ use Petar\ExcursionFreeSeats\ExcursionFreeSeats;
 use App\Nova\Filters\ExcursionDate;
 use App\Nova\Filters\ExcursionStartDate;
 use App\Nova\Filters\ExcursionLastDate;
+use Petar\ExcursionRecapitulation\ExcursionRecapitulation;
 
 
 class Excursion extends Resource
@@ -77,8 +80,9 @@ class Excursion extends Resource
      */
     public function fields(Request $request)
     {
-
-
+        $reservations = Reservation::where('excursion_id', $this->id)->get();
+        $uniqueStationIdsOfTheReservations = $reservations->unique('station_id')->pluck('station_id');
+        $stations = Station::whereIn('id', $uniqueStationIdsOfTheReservations)->get();
 
         $excursionsType = ExcursionType::all();
         $excursionsTypeArray = [];
@@ -87,12 +91,14 @@ class Excursion extends Resource
         }
 
         $fields = [
+            ExcursionRecapitulation::make('Rekapitulacija')->onlyOnDetail()->passToVueComponent($reservations, $stations),
             ID::make(__('ID'), 'id')->sortable(),
             Number::make('Ukupan broj mjesta', 'total_seats'),
+            Number::make('Broj mjesta za djecu', 'total_child_seats')->readonly(), //readonly as it shouldnt be set
             ExcursionFreeSeats::make('Broj slobodnih mjesta')
                               ->passToVueComponent($this->freeSeats)
                               ->exceptOnForms(),
-            DateTime::make('Polazak', 'departure'),
+            DateTime::make('Polazak', 'departure')->sortable(),
 
 
             HasMany::make('Rezervacije', 'reservations', 'App\Nova\Reservation'),

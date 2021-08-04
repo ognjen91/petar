@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Builder;
 class CreateBookerPdfReport extends Action
 {
     use InteractsWithQueue, Queueable;
-    public $name = "Kreirajte pdf izvještaj za bukera";
+    public $name = "Kreirajte pdf izvještaj za bukera: redovni izleti";
 
     /**
      * Perform the action on the given models.
@@ -45,7 +45,7 @@ class CreateBookerPdfReport extends Action
         session()->flash('booker-pdf-report-end-date', $fields->end_date);
 
 
-        return Action::redirect(route('booker-pdf-download'));
+        return Action::redirect(route('booker-pdf-download-regular-excursions'));
     }
 
     /**

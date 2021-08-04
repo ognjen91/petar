@@ -1,6 +1,8 @@
 <template>
     <v-row id="my-reservations-params">
-        <v-col cols="6" md="4" lg="3" class="flex items-center justify-center flex-column">
+        
+        <!-- START DATE -->
+        <v-col cols="6" :md="showExcursionTypesSelect? 4 : 6" :lg="showExcursionTypesSelect? 3 : 4" class="flex items-center justify-center flex-column">
             <p @click="startCalendar = !startCalendar">Od: {{startDate}}</p>
             <v-date-picker
             v-model="startDate"
@@ -10,7 +12,9 @@
             >
             </v-date-picker>
         </v-col>
-        <v-col cols="6" md="4" lg="3" class="flex items-center justify-center flex-column">
+
+        <!-- END DATE -->
+        <v-col cols="6" :md="showExcursionTypesSelect? 4 : 6" :lg="showExcursionTypesSelect? 3 : 4" class="flex items-center justify-center flex-column">
             <p @click="endCalendar = !endCalendar">Do: {{endDate}}</p>
             <v-date-picker 
             v-model="endDate" 
@@ -20,7 +24,9 @@
             >
             </v-date-picker>
         </v-col>
-        <v-col cols="6" md="4" lg="3" class="flex items-center justify-center flex-column">
+
+        <!-- EXCURSION TYPE -->
+        <v-col cols="6" :md="showExcursionTypesSelect? 4 : 6" :lg="showExcursionTypesSelect? 3 : 4" class="flex items-center justify-center flex-column" v-if='showExcursionTypesSelect'>
             <v-select
             v-model="selectedType"
             :items="excursionTypes"
@@ -32,7 +38,7 @@
             >
             </v-select>
         </v-col>
-        <v-col cols="6" md="4" lg="3" class="flex items-center justify-center flex-column">
+        <v-col cols="6" :md="showExcursionTypesSelect? 4 : 6" :lg="showExcursionTypesSelect? 3 : 4" class="flex items-center justify-center flex-column">
             <v-btn
             elevation="2"
             @click="redirect"
@@ -43,10 +49,20 @@
 <script>
 export default {
     props : {
+        baseUrl : {
+            Type : String,
+            required : false,
+            default : "/moje-rezervacije?"
+        },
         excursionTypes : {
             Type : Array,
             required : false,
             default : () => []
+        },
+        showExcursionTypesSelect :{
+            Type : Boolean,
+            required : false,
+            default : true
         },
         initialStartDate : {
             Type : String,
@@ -57,7 +73,7 @@ export default {
             Type : String,
             required : false,
             default : (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)
-        }
+        },
     },
 
     data(){
@@ -81,7 +97,7 @@ export default {
         },
 
         redirect(){
-            let url = "/moje-rezervacije?"
+            let url = `${this.baseUrl}?`
             if(this.selectedType.id) url += `excursionType=${this.selectedType.id}&`
             if(this.startDate) url += `type=${this.startDate}&`
             if(this.endDate) url += `type=${this.endDate}&`

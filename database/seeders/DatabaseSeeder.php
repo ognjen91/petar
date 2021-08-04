@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $superAdminRole = Role::create(['name' => 'Super Admin']);
         $adminRole = Role::create(['name' => 'Admin']);
         $bookerRole = Role::create(['name' => 'Booker']);
+        $captainRole = Role::create(['name' => 'Captain']);
         
         $manageExcursionsPermission = Permission::create(['name' => 'manage excursions']);
         $bookExcursionsPermission = Permission::create(['name' => 'book excursions']);
@@ -75,25 +76,19 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-
-        $booker1 = User::factory()->create(
+        $captain1 = User::factory()->create(
             [
-                'name' => 'John Doe 1',
-                'email' => 'petarbooker1@gmail.com',
+                'name' => 'Petar Captain 1',
+                'email' => 'petarcaptain1@gmail.com',
                 'password' => bcrypt(12345678)
             ]
         );
 
-        $booker2 = User::factory()->create(
-            [
-                'name' => 'John Doe 2',
-                'email' => 'petarbooker2@gmail.com',
-                'password' => bcrypt(12345678)
-            ]
-        );
+
 
         $booker1->assignRole('Booker');
         $booker2->assignRole('Booker');
+        $captain1->assignRole('Captain');
 
         $this->booker1 = $booker1;
         $this->booker2 = $booker2;

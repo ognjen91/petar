@@ -27,8 +27,10 @@ class BookController extends Controller
         $excursion->reservations()->create([
             'booker_id' => auth()->user()->id, //todo : add the logic,
             'seats' => $request->seats,
+            'child_seats' => $request->child_seats,
             'station_id' => $request->station,
-            'price' => $request->price
+            'price' => $request->price,
+            'message' => $request->message
         ]);
 
         return response()->json([

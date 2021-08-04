@@ -27,12 +27,16 @@
         @dateSelected="proceedDateSelected"
         />
 
-        <!-- SEATS -->
+        <!-- SEATS, CHILD SEATS, PRICE -->
         <v-row>
             <v-col cols="12" class='flex flex-column justify-center items-center'>
                 <div class="mb-3">
                     <label for="seats"><strong>Broj mjesta</strong></label><br>
                     <input id="seats" type="number" placeholder="Broj mjesta" v-model="seats" min="1">
+                </div>
+                <div class="mb-3">
+                    <label for="childSeats"><strong>Broj mjesta za djecu</strong></label><br>
+                    <input id="childSeats" type="number" placeholder="Broj mjesta za djecu" v-model="childSeats" min="0">
                 </div>
                 <div class="">
                     <label for="price"><strong>Naplaćeni iznos</strong></label><br>
@@ -41,7 +45,7 @@
              </v-col>
         </v-row>
 
-
+        <!-- ======EXCURSION SELECT====== -->
         <v-row>
             <v-col cols="12">
                 <ExcursionsOnTheDateWithEnoughSeats 
@@ -52,8 +56,23 @@
              </v-col>
         </v-row>
 
+        <!-- ======MESSAGE====== -->
         <v-row>
             <v-col cols="12">
+                <v-textarea
+                outlined
+                name="input-7-4"
+                label="Dodatna poruka"
+                v-model="message"
+                >
+                </v-textarea>            
+        </v-col>
+        </v-row>
+
+        <!-- BTNS -->
+        <v-row>
+            <v-col cols="12">
+            <!-- IF ALL REQUIRED PARAMS ARE SELECTED -->
                 <v-btn
                 color="green"
                 class="white--text"
@@ -66,6 +85,7 @@
                 Bukiraj izlet
                 </v-btn>
 
+            <!-- IF ALL REQUIRED PARAMS ARE NOT SELECTED -->
                 <v-btn
                 color="red lighten-2"
                 class="white--text"
@@ -87,7 +107,7 @@
         <ErrorDialog
         :show="showErrorDialog"
         :error='error'
-        @closeErrorDialog="showSuccessDialog = false"
+        @closeErrorDialog="showErrorDialog = false"
         />
 
 
@@ -126,8 +146,10 @@ export default {
             selectedDate : (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
             excursionsOnTheDate : [],
             seats : 1,
+            childSeats : 0,
             price : null,
             selectedExcursionId : null,
+            message : "",
             showBookBtn : false,
             showSuccessDialog : false,
             showErrorDialog : false,
@@ -179,7 +201,9 @@ export default {
                 selectedExcursionId : this.selectedExcursionId,
                 station : this.selectedStationId,
                 seats : this.seats,
-                price : this.price
+                child_seats : this.childSeats,
+                price : this.price,
+                message : this.message
             }).then(({data}) => {
                 this.showSuccessDialog = true
                 setTimeout(()=>{

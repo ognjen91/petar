@@ -12,7 +12,7 @@
             class='mb-4'
             :class="{'white--text' : excursion.id == selectedExcursionId}"
             >
-                {{excursion.departure}}
+                <strong>{{excursion.departure}}</strong> &nbsp; <small v-if="excursion.childSeats" class='red--text'>[<strong>{{excursion.childSeats}}</strong> djece na izletu]</small>
             </v-btn>            
         </v-col>
     </v-row>

@@ -12,7 +12,8 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/booker.js', 'public/js').vue();
-mix.sass('resources/sass/booker.scss', 'public/css');
+mix.sass('resources/sass/booker.scss', 'public/css')
+    .sass('resources/sass/crew-member.scss', 'public/css');
 
 mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
     require('postcss-import'),

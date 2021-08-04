@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Excursion extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['excursion_type_id', 'departure', 'total_seats'];
+    protected $fillable = ['excursion_type_id', 'departure', 'total_seats', 'total_child_seats'];
 
     protected static function boot() {
 
@@ -65,6 +66,11 @@ class Excursion extends Model
     /**
      * ACCESSORS
      */
+
+    public function getNameAttribute($query){
+        return $this->excursionType->name . " u " . Carbon::parse($this->departure)->format('H:i');
+    }
+
     public function getFreeSeatsAttribute($query){
         return $this->total_seats - $this->reservations()->active()->get()->sum('seats');
     }

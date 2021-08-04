@@ -22,6 +22,7 @@
                 <navigation-drawer 
                 bookers-name="{{auth()->user()->name}}"
                 logout-route="{{route('logout')}}"
+                login-route="{{route('login')}}"
                 ></navigation-drawer>
             @endauth
             {{ $slot }}
