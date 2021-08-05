@@ -18,6 +18,7 @@
     </head>
     <body class="">
         <v-app id="app" class=''>
+            @include('layouts.navigation')
             @auth
                 <navigation-drawer 
                 bookers-name="{{auth()->user()->name}}"
