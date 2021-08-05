@@ -17,8 +17,6 @@ class PrivateExcursionReservationResource extends JsonResource
     {
         return [
             'title' => $this->title,
-            // 'title' => Carbon::parse($this->start)->format('H:i') . "-" . Carbon::parse($this->end)->format('H:i'),
-            // 'title' => $this->title . "(od " . Carbon::parse($this->start)->format('H:i') . " do " . Carbon::parse($this->end)->format('H:i') . ")",
             'start' => Carbon::parse($this->start)->timestamp,
             'end' => Carbon::parse($this->end)->timestamp,
             'formatedStartTime' => Carbon::parse($this->start)->format('H:i'),

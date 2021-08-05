@@ -3,14 +3,14 @@
     <div class="container">
 
         <div class='my-3'>
+            {{-- TITLE & BASIC INFO --}}
             <h1 class='text-center blue--text'>Moje rezevacije privatnih izleta</h1>
-            
-            
             @if($startDate || $endDate)
-            <h2 class='text-center blue--text'>Period @if($startDate) od {{$startDate}} @endif @if($endDate) do {{$endDate}} @endif</h2>
+                <h2 class='text-center blue--text'>Period @if($startDate) od {{$startDate}} @endif @if($endDate) do {{$endDate}} @endif</h2>
             @endif
         </div>
 
+        {{-- SELECT PARAMS --}}
         <div class="mb-2">
             <booker-redirect-params-select
             class='mb-5' 
@@ -22,7 +22,7 @@
             </booker-redirect-params-select>
         </div>
             
-        
+        {{-- THE TABLE --}}
         @if($reservations->total())
             <table id="my-reservations">
                 <tr>
@@ -57,9 +57,9 @@
             <h3 class="red--text text-center">Nema rezervacija za zadate parametre</h3>
         @endif
 
-        {{-- <div class="d-flex justify-center text-center">
+        <div class="d-flex justify-center text-center">
             {{ $reservations->links() }}
-        </div> --}}
+        </div>
         
     </div>
     </x-layout-booker>

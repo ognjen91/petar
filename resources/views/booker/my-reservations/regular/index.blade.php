@@ -3,6 +3,7 @@
     <div class="container">
 
         <div class='my-3'>
+            {{-- TITLE & BASIC INFO --}}
             <h1 class='text-center blue--text'>Moje rezevacije redovnih izleta</h1>
             
             @if($excursionType)
@@ -29,6 +30,7 @@
             
         
         @if($reservations->total())
+            {{-- THE TABLE --}}
             <table id="my-reservations">
                 <tr>
                     @if(!$excursionType)<th>Izlet</th>@endif
@@ -64,6 +66,7 @@
             <h3 class="red--text text-center">Nema rezervacija za zadate parametre</h3>
         @endif
 
+        {{-- LINKS --}}
         <div class="d-flex justify-center text-center">
             {{ $reservations->links() }}
         </div>

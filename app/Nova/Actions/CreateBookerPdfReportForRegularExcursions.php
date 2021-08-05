@@ -23,7 +23,7 @@ use App\Models\Reservation;
 use Illuminate\Database\Eloquent\Builder;
 
 
-class CreateBookerPdfReport extends Action
+class CreateBookerPdfReportForRegularExcursions extends Action
 {
     use InteractsWithQueue, Queueable;
     public $name = "Kreirajte pdf izvještaj za bukera: redovni izleti";

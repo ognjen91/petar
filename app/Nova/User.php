@@ -9,7 +9,7 @@ use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 
 use Laravel\Nova\Fields\HasMany;
-use App\Nova\Actions\CreateBookerPdfReport;
+use App\Nova\Actions\CreateBookerPdfReportForRegularExcursions;
 use App\Nova\Actions\CreateBookerPdfReportForPrivateExcursions;
 use Laravel\Nova\Fields\BelongsToMany;
 
@@ -142,7 +142,7 @@ class User extends Resource
     public function actions(Request $request)
     {
         return [
-            new CreateBookerPdfReport,
+            new CreateBookerPdfReportForRegularExcursions,
             new CreateBookerPdfReportForPrivateExcursions
         ];
     }
