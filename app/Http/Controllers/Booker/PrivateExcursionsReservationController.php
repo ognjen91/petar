@@ -14,7 +14,7 @@ use App\Http\Requests\PrivateTourReservationRequest;
 class PrivateExcursionsReservationController extends Controller
 {
     public function index(Request $request){
-        $futurePrivateExcursions = PrivateExcursionReservation::whereDate('start', '>=', Carbon::today()->toDateString())->get();
+        $futurePrivateExcursions = PrivateExcursionReservation::active()->whereDate('start', '>=', Carbon::today()->toDateString())->get();
         $futurePrivateExcursions = PrivateExcursionReservationResource::collection($futurePrivateExcursions)->resolve();
 
         return view('booker.private-excursions.index', compact('futurePrivateExcursions'));
