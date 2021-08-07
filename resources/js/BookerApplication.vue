@@ -57,11 +57,10 @@
              </v-col>
 
             <!-- CONNECTED DIRECTION, IF EXIST -->
-            <v-col cols="12">
+            <v-col cols="12" v-if="connectedTypesExist">
                 <h3 class="danger-text">Molimo odaberite povratak</h3>
 
-                <ExcursionsOnTheDateWithEnoughSeats
-                v-if="connectedTypesExist" 
+                <ExcursionsOnTheDateWithEnoughSeats 
                 :excursions="connectedExcursionsOnTheDateWithEnoughSeats"
                 @excursionSelected="proceedConnectedExcursionSelected"
                 :selected-excursion-id="selectedConnectedExcursionId"

@@ -15,20 +15,28 @@ class CheckExcursionsForDateAndTypeController extends Controller
     public function __invoke(Request $request){
         $excursions = Excursion::where('excursion_type_id', $request->selectedExcursionTypeId)
                                 ->whereDate('departure', '=', Carbon::parse($request->selectedDate)->toDateString())
+                                ->whereDate('departure', '>', Carbon::now()->toDateTimeString())
+                                ->orderBy('departure', 'asc')
                                 ->get();
 
 
         $excursionType = ExcursionType::find($request->selectedExcursionTypeId);
         $connectedExcursionTypes = $excursionType->connectedExcursionTypes;
-        $connectedTypesExist = !!$connectedExcursionTypes->count();
         $connectedExcursionTypesIds = $connectedExcursionTypes->pluck('id')->toArray();
+        $connectedTypesExist = !!$connectedExcursionTypes->count();
         $theDay = Carbon::parse($request->selectedDate)->endOfDay();
         
-
-        $excursionsOfTheConnectedTypesOnTheDay = Excursion::whereHas('excursionType', function (Builder $query) use ($connectedExcursionTypesIds) {
-            $query->whereIn('id', $connectedExcursionTypesIds);
-        })->whereDate('departure', '=', $theDay->toDateString())->get();
-
+        $excursionsOfTheConnectedTypesOnTheDay = [];
+        if($excursions->count()){
+            $excursionsOfTheConnectedTypesOnTheDay = Excursion::whereHas('excursionType', function (Builder $query) use ($connectedExcursionTypesIds) {
+                $query->whereIn('id', $connectedExcursionTypesIds);
+            })
+            ->whereDate('departure', '=', $theDay->toDateString())
+            ->whereDate('departure', '>', Carbon::now()->toDateTimeString())
+            ->orderBy('departure', 'asc')
+            ->get();
+        }
+        
                                 
         return response()->json([
             'excursionsOnTheDate' => ExcursionResource::collection($excursions)->resolve(),
