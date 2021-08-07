@@ -13,7 +13,7 @@
                 class='white--text'
                 @click='showConfirmDialog = true'
                 >
-                Otkažite rezervaciju
+                <slot></slot>
                 </v-btn>
             </template>
 

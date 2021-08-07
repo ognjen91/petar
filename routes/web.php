@@ -59,7 +59,8 @@ Route::get('/', function () {
 //TEST ROUTE
 Route::get('/booker', BookerPdfReportController::class);
 //ACTUAL DOWNLOAD ROUTE
-Route::get('/booker/pdf-download-regular-excursions', [DownloadBookerPdfReport::class, 'indexRegular'])->name('booker-pdf-download-regular-excursions');
+Route::get('/booker/pdf-download-regular-excursions-detailed', [DownloadBookerPdfReport::class, 'indexRegularDetailed'])->name('booker-pdf-download-regular-excursions-detailed');
+Route::get('/booker/pdf-download-regular-excursions-simple', [DownloadBookerPdfReport::class, 'indexRegularSimple'])->name('booker-pdf-download-regular-excursions-simple');
 Route::get('/booker/pdf-download-private-excursions', [DownloadBookerPdfReport::class, 'indexPrivate'])->name('booker-pdf-download-private-excursions');
 
 

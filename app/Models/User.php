@@ -60,7 +60,8 @@ class User extends Authenticatable
 
     public function reservations()
     {
-        return $this->hasMany(Reservation::class, 'booker_id');
+        return $this->hasMany(Reservation::class, 'booker_id')->whereNull('first_direction_reservation_id'); //first way only
+        // return $this->hasMany(Reservation::class, 'booker_id')->whereNull('first_direction_reservation_id'); //first way only
     }
         
     public function privateExcursionReservations()

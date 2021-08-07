@@ -29,7 +29,7 @@
         </div>
             
         
-        @if($reservations->total())
+        @if($reservations->count())
             {{-- THE TABLE --}}
             <table id="my-reservations">
                 <tr>
@@ -40,6 +40,10 @@
                     <th>Detalji</th>
                 </tr>
                 @foreach ($reservations as $reservation)
+                    {{-- DISPLAY ONLY IF IT IS NOT RETURN WAY RESEVATION! --}}
+                    @continue($reservation->isReturnWayDirectionReservation)
+
+                    {{-- ROW DATA DISPLAY --}}
                     <tr @class(['red--text' => !$reservation->active])>
                         @if(!$excursionType)<td><a href="{{route('my-reservations.regular.show', $reservation->id)}}" @class(['red--text' => !$reservation->active])>{{$reservation->excursion->excursionType->name}}</a></td>@endif
                         <td>{{\Carbon\Carbon::parse($reservation->excursion->departure)->format('d.m.Y')}}</td>
@@ -57,7 +61,7 @@
                 @endforeach
                 <tr>
                     @if(!$excursionType)<td></td>@endif
-                    <td>Ukupno <br> <strong>{{$reservations->total()}}</strong></td>
+                    <td>Ukupno <br> <strong>{{$reservations->count()}}</strong></td>
                     <td>Ukupno <br> <strong>{{$totalSeats}}</strong></td>
                     <td>Ukupno <br> <strong>{{$totalPrice}}</strong></td>
                 </tr>
@@ -67,9 +71,9 @@
         @endif
 
         {{-- LINKS --}}
-        <div class="d-flex justify-center text-center">
+        {{-- <div class="d-flex justify-center text-center">
             {{ $reservations->links() }}
-        </div>
+        </div> --}}
         
     </div>
     </x-layout-booker>

@@ -88,7 +88,8 @@ class ExcursionType extends Resource
                 'private' => 'Privatni izleti',
             ]),
             HasMany::make('Aktivni izleti ovog tipa', 'excursions', 'App\Nova\Excursion'),
-            BelongsToMany::make('Stanice', 'stations', 'App\Nova\Station')
+            BelongsToMany::make('Stanice', 'stations', 'App\Nova\Station'),
+            BelongsToMany::make('Povezani izleti', 'connectedExcursionTypes', 'App\Nova\ExcursionType')
         ];
     }
 

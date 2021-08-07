@@ -33,7 +33,7 @@ class BookerPrivateExcursionsReservationsController extends Controller
         
         
         $totalPrice = $reservations->active()->sum('price');
-        $reservations = $reservations->orderBy('created_at', 'desc')->paginate(50);
+        $reservations = $reservations->orderBy('start', 'desc')->get();
         
         
 

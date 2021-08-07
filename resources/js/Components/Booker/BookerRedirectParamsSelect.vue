@@ -2,7 +2,7 @@
     <v-row id="my-reservations-params">
         
         <!-- START DATE -->
-        <v-col cols="6" :md="showExcursionTypesSelect? 4 : 6" :lg="showExcursionTypesSelect? 3 : 4" class="flex items-center justify-center flex-column">
+        <v-col cols="6" :md="showExcursionTypesSelect? 4 : 6" :lg="showExcursionTypesSelect? 2 : 3" class="flex items-center justify-center flex-column">
             <p @click="startCalendar = !startCalendar">Od: {{startDate}}</p>
             <v-date-picker
             v-model="startDate"
@@ -14,7 +14,7 @@
         </v-col>
 
         <!-- END DATE -->
-        <v-col cols="6" :md="showExcursionTypesSelect? 4 : 6" :lg="showExcursionTypesSelect? 3 : 4" class="flex items-center justify-center flex-column">
+        <v-col cols="6" :md="showExcursionTypesSelect? 4 : 6" :lg="showExcursionTypesSelect? 2 : 3" class="flex items-center justify-center flex-column">
             <p @click="endCalendar = !endCalendar">Do: {{endDate}}</p>
             <v-date-picker 
             v-model="endDate" 
@@ -26,7 +26,7 @@
         </v-col>
 
         <!-- EXCURSION TYPE -->
-        <v-col cols="6" :md="showExcursionTypesSelect? 4 : 6" :lg="showExcursionTypesSelect? 3 : 4" class="flex items-center justify-center flex-column" v-if='showExcursionTypesSelect'>
+        <v-col cols="6" :md="showExcursionTypesSelect? 4 : 6" :lg="showExcursionTypesSelect? 2 : 3" class="flex items-center justify-center flex-column" v-if='showExcursionTypesSelect'>
             <v-select
             v-model="selectedType"
             :items="excursionTypes"
@@ -38,7 +38,23 @@
             >
             </v-select>
         </v-col>
-        <v-col cols="6" :md="showExcursionTypesSelect? 4 : 6" :lg="showExcursionTypesSelect? 3 : 4" class="flex items-center justify-center flex-column">
+
+
+        <!-- ORDER  -->
+        <v-col cols="6" :md="showExcursionTypesSelect? 4 : 6" :lg="showExcursionTypesSelect? 2 : 3" class="flex items-center justify-center flex-column" v-if='showExcursionTypesSelect'>
+            <v-select
+            v-model="selectedOrder"
+            :items="orderOptions"
+            item-text="label"
+            item-value="value"
+            label="Izaberite redosljed"
+            single-line
+            >
+            </v-select>
+        </v-col>
+
+
+        <v-col cols="6" :md="showExcursionTypesSelect? 4 : 6" :lg="showExcursionTypesSelect? 3 : 2" class="flex items-center justify-center flex-column">
             <v-btn
             elevation="2"
             @click="redirect"
@@ -74,6 +90,12 @@ export default {
             required : false,
             default : (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)
         },
+        order : {
+            Type : String,
+            required : false,
+            default : 'desc',
+            validator : value => ['desc', 'asc'].includes(value)
+        },
     },
 
     data(){
@@ -83,6 +105,17 @@ export default {
              endCalendar : false,
              startDate : (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
              endDate : (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+             selectedOrder : null,
+             orderOptions : [
+                 {
+                 value : 'asc',
+                 label : 'Prvo stariji'
+                },
+                 {
+                 value : 'desc',
+                 label : 'Prvo noviji'
+                },
+            ]
         }
     },
 
@@ -101,6 +134,7 @@ export default {
             if(this.selectedType.id) url += `excursionType=${this.selectedType.id}&`
             if(this.startDate) url += `type=${this.startDate}&`
             if(this.endDate) url += `type=${this.endDate}&`
+            if(this.selectedOrder) url += `order=${this.selectedOrder}&`
 
             window.location.href = url;
 

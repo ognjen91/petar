@@ -18,7 +18,9 @@
                     excursion-type="private"
                     class='my-5'
                     :reservation-id="{{$reservation->id}}"
-                    ></cancel-reservation-button>
+                    >
+                    Otkažite privatni izlet
+                    </cancel-reservation-button>
                 @else
                      {{-- FUTURE: IF CANCELED --}}
                     <h2 class='red--text'><u>Rezervacija je otkazana</u></h2>

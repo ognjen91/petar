@@ -46,6 +46,11 @@ class BookerPdfReportController extends Controller
         });
 
         $reservations = $reservations->get();
+        //sort by departure date
+        $reservations = $reservations->sortBy(function ($reservation, $key) {
+            return $reservation->excursion->departure;
+        });
+
         $totalPrice = $reservations->sum('price');
         $totalSeats = $reservations->sum('seats');
         // dd($reservations);

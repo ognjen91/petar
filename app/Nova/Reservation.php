@@ -8,6 +8,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\Boolean;
 
 
@@ -16,6 +17,7 @@ use App\Nova\Filters\ReservationExcursionType;
 use App\Nova\Filters\ReservationExcursionExactDate;
 use App\Nova\Filters\ReservationExcursionStartDate;
 use App\Nova\Filters\ReservationExcursionLastDate;
+use App\Nova\Filters\ShowReturnReservations;
 
 
 class Reservation extends Resource
@@ -84,7 +86,7 @@ class Reservation extends Resource
      */
     public function fields(Request $request)
     {
-        return [
+        $fields = [
             // ID::make(__('ID'), 'id')->sortable(),
             BelongsTo::make('Izlet', 'excursion', 'App\Nova\Excursion')->readonly(),
             Text::make('Broj mjesta', 'seats')->readonly(),
@@ -92,8 +94,12 @@ class Reservation extends Resource
             BelongsTo::make('Stanica', 'station', 'App\Nova\Station')->readonly()->sortable(),
             BelongsTo::make('Buker', 'booker', 'App\Nova\User')->readonly()->sortable(),
             Boolean::make('Status', 'active')->readonly(),
-            Textarea::make('Dodatna poruka', 'message')->readonly()
+            Textarea::make('Dodatna poruka', 'message')->readonly(),
+            HasOne::make('Rezervacija povratnog smjera', 'returnDirectionReservation', 'App\Nova\Reservation')->readonly(),
         ];
+
+    
+        return $fields;
     }
 
     /**
@@ -121,6 +127,7 @@ class Reservation extends Resource
             new ReservationExcursionExactDate,
             new ReservationExcursionStartDate,
             new ReservationExcursionLastDate,
+            new ShowReturnReservations
         ];
     }
 

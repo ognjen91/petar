@@ -14,6 +14,8 @@ class BookerHomepageController extends Controller
     
     public function __invoke(){
         $excursionTypes = ExcursionTypeResource::collection(ExcursionType::all())->resolve();
+        // dd(ExcursionType::where('slug', 'hn-zanjice')->first()->connectedExcursionTypes);
+        // dd($excursionTypes);
         return view('booker.homepage', compact('excursionTypes'));
     }
 }

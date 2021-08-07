@@ -14,8 +14,9 @@ class BookController extends Controller
         // selectedExcursionId : this.selectedExcursionId,
         // seats : this.seats
         // return response()->json([
-        //     'status' => 'Greška! Broj slobodnih mjesta je u međuvremenu smanjen. Molimo da odaberete drugi broj i pokušate ponovo'
+        //     'status' => $request->all()
         // ], 501); 
+        // dd($request->all());
 
         $excursion = Excursion::find($request->selectedExcursionId);
         if($excursion->freeSeats < $request->seats){
@@ -23,8 +24,18 @@ class BookController extends Controller
                 'status' => 'Greška! Broj slobodnih mjesta je u međuvremenu smanjen. Molimo da odaberete drugi broj i pokušate ponovo'
             ], 501); 
         }
+        
+        if($request->selectedConnectedExcursionId){
+            $returnExcursion = Excursion::find($request->selectedConnectedExcursionId);
+            if($returnExcursion->freeSeats < $request->seats){
+                return response()->json([
+                    'status' => 'Greška! Broj slobodnih mjesta za povratni izlet je u međuvremenu smanjen. Molimo da odaberete drugi broj i pokušate ponovo'
+                ], 501); 
+            }
+        }
 
-        $excursion->reservations()->create([
+
+        $reservation = $excursion->reservations()->create([
             'booker_id' => auth()->user()->id, //todo : add the logic,
             'seats' => $request->seats,
             'child_seats' => $request->child_seats,
@@ -32,6 +43,28 @@ class BookController extends Controller
             'price' => $request->price,
             'message' => $request->message
         ]);
+
+
+        
+        // if selectedConnectedExcursionId is set, create reservation for the return way
+        
+        if(isset($request->selectedConnectedExcursionId)){
+
+            if(!$returnExcursion) return response()->json([
+                                             'status' => 'Početni smjer je rezervisan, ali povratni nije pronađen'
+                                            ], 501); 
+
+            $reservation->returnDirectionReservation()->create([
+                'booker_id' => auth()->user()->id, //todo : add the logic,
+                'excursion_id' => $request->selectedConnectedExcursionId,
+                'first_direction_reservation_id' => $reservation->id, //previously created reservation
+                'seats' => $request->seats,
+                'child_seats' => $request->child_seats,
+                'station_id' => $returnExcursion->excursionType->stations()->first()->id,
+                'price' => 0,
+                'message' => '(Rezervacija povratnog smjera)' . $request->message,
+            ]);
+        }
 
         return response()->json([
             'status' => 'Uspješno rezerivsano'

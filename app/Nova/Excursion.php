@@ -17,10 +17,13 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\BelongsTo;
 use Petar\ExcursionFreeSeats\ExcursionFreeSeats;
 
+use App\Nova\Filters\ExcursionType as ExcursionTypeFilter;
 use App\Nova\Filters\ExcursionDate;
 use App\Nova\Filters\ExcursionStartDate;
 use App\Nova\Filters\ExcursionLastDate;
+use App\Nova\Filters\ExcursionActive;
 use Petar\ExcursionRecapitulation\ExcursionRecapitulation;
+use Illuminate\Database\Eloquent\Builder;
 
 
 class Excursion extends Resource
@@ -56,6 +59,17 @@ class Excursion extends Resource
      * [label in the admin panel]
      * @return [String]
      */
+
+    /**
+     * OWERWRITE PARENTS METHOD SO THAT REGULAR USERS CAN SEE THEIR RESTAURANT'S MENU ITEMS ONLY
+     */
+
+
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        return $query->orderBy('departure', 'asc');
+    }
+
 
     public static function label()
     {
@@ -94,10 +108,10 @@ class Excursion extends Resource
             ExcursionRecapitulation::make('Rekapitulacija')->onlyOnDetail()->passToVueComponent($reservations, $stations),
             ID::make(__('ID'), 'id')->sortable(),
             Number::make('Ukupan broj mjesta', 'total_seats'),
-            Number::make('Broj mjesta za djecu', 'total_child_seats')->readonly(), //readonly as it shouldnt be set
             ExcursionFreeSeats::make('Broj slobodnih mjesta')
-                              ->passToVueComponent($this->freeSeats)
-                              ->exceptOnForms(),
+            ->passToVueComponent($this->freeSeats)
+            ->exceptOnForms(),
+            Number::make('Broj mjesta za djecu', 'total_child_seats')->readonly(), //readonly as it shouldnt be set
             DateTime::make('Polazak', 'departure')->sortable(),
 
 
@@ -132,6 +146,8 @@ class Excursion extends Resource
     public function filters(Request $request)
     {
         return [
+            new ExcursionActive,
+            new ExcursionTypeFilter,
             new ExcursionDate,
             new ExcursionStartDate,
             new ExcursionLastDate

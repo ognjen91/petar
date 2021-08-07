@@ -4,6 +4,7 @@
           <v-date-picker
           locale="sr-latn" 
           v-model="selectedDate"
+          :min="min"
           @input="onInput"
           ></v-date-picker>
         </v-col>
@@ -21,7 +22,8 @@ export default {
 
   data () {
     return {
-      selectedDate: null
+      selectedDate: null,
+      min : (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
     }
   },
 

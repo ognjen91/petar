@@ -44,8 +44,8 @@ class CreateBookerPdfReportForRegularExcursions extends Action
         session()->flash('booker-pdf-report-start-date', $fields->start_date);
         session()->flash('booker-pdf-report-end-date', $fields->end_date);
 
-
-        return Action::redirect(route('booker-pdf-download-regular-excursions'));
+        $route = $fields->report_type == 'detailed'? route('booker-pdf-download-regular-excursions-detailed') : route('booker-pdf-download-regular-excursions-simple');
+        return Action::redirect($route);
     }
 
     /**
@@ -64,6 +64,11 @@ class CreateBookerPdfReportForRegularExcursions extends Action
             $bookerOptions[$booker->id] = $booker->name;
         }
         $fields[] =  Select::make('Buker', 'booker_id')->options($bookerOptions);
+
+        $fields[] =  Select::make('Detaljnost izvještaja', 'report_type')->options([
+            'detailed' => 'Detaljan',
+            'simple' => 'Jednostvan'
+        ]);
         
         // ===BOOKERS===
         $allExcursionTypes = ExcursionType::get();

@@ -19,21 +19,10 @@ class ExcursionRecapitulation extends Field
 
     public function passToVueComponent($reservations, $stations)
     {
-        // $excursion = Excursion::find($id);
-        // $reservations =  $excursion->reservations;
-        // $reservations = Reservation::where('excursion_id', $excursion->id)->get();
         
-
-
         return $this->withMeta([
             'reservations' => $reservations,
             'stations' => $stations
-            // 'excursion' => $excursion,
-            // 'reservations' => $reservations
-            // 'reservations' => $reservations
-            // 'reservations' => $excursion->reservations->groupBy(function ($reservation, $key) {
-            //                                                     return $reservation->station->name;
-            //                                                  })
         ]);
     }
 }

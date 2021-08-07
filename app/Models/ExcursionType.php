@@ -24,4 +24,8 @@ class ExcursionType extends Model
     {
         return $this->belongsToMany(Station::class, 'excursion_type_station');
     }
+
+    public function connectedExcursionTypes(){
+        return $this->belongsToMany(ExcursionType::class, 'connected_excursion_types', 'direction_1', 'direction_2');
+    }
 }

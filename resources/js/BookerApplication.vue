@@ -47,6 +47,7 @@
 
         <!-- ======EXCURSION SELECT====== -->
         <v-row>
+            <!-- MAIN DIRECTION -->
             <v-col cols="12">
                 <ExcursionsOnTheDateWithEnoughSeats 
                 :excursions="excursionsOnTheDateWithEnoughSeats"
@@ -54,6 +55,20 @@
                 :selected-excursion-id="selectedExcursionId"
                 />
              </v-col>
+
+            <!-- CONNECTED DIRECTION, IF EXIST -->
+            <v-col cols="12">
+                <h3 class="danger-text">Molimo odaberite povratak</h3>
+
+                <ExcursionsOnTheDateWithEnoughSeats
+                v-if="connectedTypesExist" 
+                :excursions="connectedExcursionsOnTheDateWithEnoughSeats"
+                @excursionSelected="proceedConnectedExcursionSelected"
+                :selected-excursion-id="selectedConnectedExcursionId"
+                />
+             </v-col>
+
+
         </v-row>
 
         <!-- ======MESSAGE====== -->
@@ -80,7 +95,7 @@
                 x-large
                 style="width: 100%;"
                 @click="book"
-                v-if='price && seats && selectedExcursionId && selectedStationId '
+                v-if='price && seats && selectedExcursionId && selectedStationId && canProceedAccordingToConnectedExcursionRequirement'
                 >
                 Bukiraj izlet
                 </v-btn>
@@ -145,10 +160,13 @@ export default {
             selectedStationId : null,
             selectedDate : (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
             excursionsOnTheDate : [],
+            connectedExcursionsOnTheDate : [],
+            connectedTypesExist : false,
+            selectedExcursionId : null,
+            selectedConnectedExcursionId : null,
             seats : 1,
             childSeats : 0,
             price : null,
-            selectedExcursionId : null,
             message : "",
             showBookBtn : false,
             showSuccessDialog : false,
@@ -161,9 +179,18 @@ export default {
         excursionsOnTheDateWithEnoughSeats(){
             return this.excursionsOnTheDate.filter(exc => +exc.freeSeats >= +this.seats)
         },
+        connectedExcursionsOnTheDateWithEnoughSeats(){
+            if(!this.connectedTypesExist) return []
+            return this.connectedExcursionsOnTheDate.filter(exc => +exc.freeSeats >= +this.seats)
+        },
         selectedExcursionTypesStations(){
             if(!this.selectedExcursionType) return []
             return this.selectedExcursionType.stations
+        },
+
+        canProceedAccordingToConnectedExcursionRequirement(){
+            if(!this.connectedTypesExist) return true
+            if(this.connectedTypesExist) return !!this.selectedConnectedExcursionId
         }
     },
 
@@ -179,7 +206,9 @@ export default {
         proceedExcursionSelected(excursion){
             this.selectedExcursionId = excursion.id
         },
-
+        proceedConnectedExcursionSelected(excursion){
+            this.selectedConnectedExcursionId = excursion.id
+        },
         proceedStationSelected(station){
             this.selectedStationId = station.id
         },
@@ -188,24 +217,36 @@ export default {
         checkAvailableTimes(){
             axios.post('check-excursions-on-date', {
                 selectedExcursionTypeId : this.selectedExcursionType.id,
-                selectedDate : this.selectedDate
+                selectedDate : this.selectedDate,
             }).then(({data}) => {
                 this.excursionsOnTheDate = data.excursionsOnTheDate
+                this.connectedExcursionsOnTheDate = data.connectedExcursionsOnTheDate,
+                this.connectedTypesExist = data.connectedTypesExist
             })
             .catch((error) => {
+                this.excursionsOnTheDate = []
+                this.connectedExcursionsOnTheDate = []
             })
         },
 
         book(){
-            axios.post('book', {
+            let bookingData = {
                 selectedExcursionId : this.selectedExcursionId,
                 station : this.selectedStationId,
                 seats : this.seats,
                 child_seats : this.childSeats,
                 price : this.price,
                 message : this.message
-            }).then(({data}) => {
+            }
+            if(this.selectedConnectedExcursionId) bookingData['selectedConnectedExcursionId'] = this.selectedConnectedExcursionId
+
+            axios.post('book', bookingData).then(({data}) => {
                 this.showSuccessDialog = true
+                this.excursionsOnTheDate = []
+                this.connectedExcursionsOnTheDate = []
+                this.selectedExcursionId = null
+                this.selectedConnectedExcursionId = null
+
                 setTimeout(()=>{
                     location.reload();
                 }, 4000)
@@ -226,7 +267,10 @@ export default {
             this.showBookBtn = !!newVal
         },
         excursionsOnTheDateWithEnoughSeats(newVal){
-            if(newVal.length) this.selectedExcursionId = false
+            // if(newVal.length){
+                this.selectedExcursionId = null
+                this.selectedConnectedExcursionId = null
+            // } 
         }
     }
 }

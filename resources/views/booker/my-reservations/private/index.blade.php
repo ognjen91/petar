@@ -23,7 +23,7 @@
         </div>
             
         {{-- THE TABLE --}}
-        @if($reservations->total())
+        @if($reservations->count())
             <table id="my-reservations">
                 <tr>
                     <th>Početak</th>
@@ -47,7 +47,7 @@
                     </tr>
                 @endforeach
                 <tr>
-                    <td>Ukupno <br> <strong>{{$reservations->total()}}</strong></td>
+                    <td>Ukupno <br> <strong>{{$reservations->count()}}</strong></td>
                     <td></td>
                     <td>Ukupno <br> <strong>{{$totalPrice}} &euro;</strong></td>
                     <td></td>
@@ -57,9 +57,9 @@
             <h3 class="red--text text-center">Nema rezervacija za zadate parametre</h3>
         @endif
 
-        <div class="d-flex justify-center text-center">
+        {{-- <div class="d-flex justify-center text-center">
             {{ $reservations->links() }}
-        </div>
+        </div> --}}
         
     </div>
     </x-layout-booker>

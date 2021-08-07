@@ -44,13 +44,27 @@ class BookerRegularExcursionsReservationsController extends Controller
         $totalPrice = $reservations->active()->sum('price');
         $totalSeats = $reservations->active()->sum('seats');
         
-        $reservations = $reservations->orderBy('created_at', 'desc')->paginate(50);
+        // $reservations = $reservations->orderBy('created_at', 'desc')->paginate(50);
+        $reservations = $reservations->orderBy('created_at', 'desc')->get();
+
+        if($request->order == 'asc'){
+            $reservations = $reservations->sortBy(function ($reservation, $key) {
+                return $reservation->excursion->departure;
+            });
+        }else{
+            $reservations = $reservations->sortByDesc(function ($reservation, $key) {
+                return $reservation->excursion->departure;
+            });
+        }
+
 
 
         return view('booker.my-reservations.regular.index', compact('reservations', 'excursionType', 'startDate', 'endDate', 'totalPrice', 'totalSeats', 'excursionTypes'));
     }
 
     public function show(Request $request, Reservation $reservation){
-        return view('booker.my-reservations.regular.show', compact('reservation'));
+        $returnDirectionReservation = $reservation->returnDirectionReservation;
+
+        return view('booker.my-reservations.regular.show', compact('reservation', 'returnDirectionReservation'));
     }
 }

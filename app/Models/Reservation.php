@@ -19,7 +19,8 @@ class Reservation extends Model
                             'active', 
                             'cancelation_time',
                             'child_seats',
-                            'message'
+                            'message',
+                            'first_direction_reservation_id'
                         ];
 
     protected static function boot() {
@@ -51,6 +52,18 @@ class Reservation extends Model
         return $this->belongsTo(User::class, 'booker_id');
     }
 
+    // CONNECTED RESERVATION (OF THE RETURN DIRECTION WAY)
+    public function returnDirectionReservation(){
+        return $this->hasOne(Reservation::class, 'first_direction_reservation_id');
+    }
+    
+    // CONNECTED RESERVATION VICE VERSA RELATIONSHIP
+    public function firstDirectionReservation(){
+        return $this->belongsTo(Reservation::class, 'first_direction_reservation_id');
+    }
+
+    
+
 
     /**
      * SCOPES
@@ -65,8 +78,21 @@ class Reservation extends Model
      * ACCESSORS
      */
 
+     
+    public function getIsCanceledAttribute(){
+        return !!$this->cancelation_time;
+    }
+
+     public function getDepartureAttribute(){
+         return $this->excursion->departure;
+     }
+
      public function getIsInFutureAttribute(){
          return Carbon::parse($this->excursion->departure) > Carbon::now();
+     }
+
+     public function getIsReturnWayDirectionReservationAttribute(){
+         return !!$this->first_direction_reservation_id;
      }
 
 

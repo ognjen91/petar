@@ -24,6 +24,7 @@
                 v-model="start"
                 input-id="startDate"
                 :class="{'not-selected' : !start}"
+                :min-datetime="min"
                 >
                     <label for="startDate" slot="before">
                         <span v-if="!start">Kliklite <span class="red--text">ovdje </span> da odaberete datum i vrijeme početka izleta</span>        
@@ -40,6 +41,7 @@
                 v-model="end"
                 input-id="endDate"
                 :class="{'not-selected' : !end}"
+                :min-datetime="min"
                 >
                     <label for="endDate" slot="before">
                         <span v-if="!end">Kliklite <span class="red--text">ovdje </span> da odaberete datum i vrijeme kraja izleta</span>        
@@ -114,7 +116,8 @@ export default {
             message : "",
             showSuccessDialog : false,
             showErrorDialog : false,
-            error : ""
+            error : "",
+            min : (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
         }
     },
 
