@@ -27,7 +27,7 @@ class ExcursionsOrder extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->orderBy($value);
+        return $query->orderBy('departure', $value);
     }
 
     /**

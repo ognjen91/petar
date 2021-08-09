@@ -9,7 +9,7 @@ class ExcursionType extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['type', 'slug', 'name'];
+    protected $fillable = ['type', 'slug', 'name', 'crew_can_see'];
 
     /**
      * RELATIONSHIPS

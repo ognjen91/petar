@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Select;
 
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Boolean;
 
 use App\Nova\Actions\CreateExcursionsOfTypeInDateRange;
 
@@ -87,6 +88,7 @@ class ExcursionType extends Resource
                 'regular' => 'Regularni izleti',
                 'private' => 'Privatni izleti',
             ]),
+            Boolean::make('Da li da se ovaj izlet prikazuje posadi', 'crew_can_see'),
             HasMany::make('Aktivni izleti ovog tipa', 'excursions', 'App\Nova\Excursion'),
             BelongsToMany::make('Stanice', 'stations', 'App\Nova\Station'),
             BelongsToMany::make('Povezani izleti', 'connectedExcursionTypes', 'App\Nova\ExcursionType')

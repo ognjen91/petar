@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 
 class Excursion extends Model
@@ -61,6 +62,17 @@ class Excursion extends Model
      public function seatChangeHistories(){
          return $this->hasMany(SeatChangeHistory::class);
      }
+
+    /**
+     * SCOPES
+     */
+
+    public function scopeCrewCanSee($query)
+    {
+        $query->whereHas('excursionType', function (Builder $excTypeQuery) {
+            $excTypeQuery->where('crew_can_see', 1);
+        });
+    }
 
 
     /**

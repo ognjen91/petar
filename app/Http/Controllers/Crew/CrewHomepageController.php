@@ -13,7 +13,7 @@ class CrewHomepageController extends Controller
     public function __invoke(Request $request){
         $date = !$request->date? Carbon::today() : Carbon::parse($request->date);
 
-        $todaysExcursions = Excursion::whereDate('departure', $date)->orderBy('departure', 'asc')->get();
+        $todaysExcursions = Excursion::whereDate('departure', $date)->crewCanSee()->orderBy('departure', 'asc')->get();
 
         $excursions = [];
         foreach($todaysExcursions as $excursion){
