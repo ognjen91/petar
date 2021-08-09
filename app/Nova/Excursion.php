@@ -67,7 +67,7 @@ class Excursion extends Resource
 
     public static function indexQuery(NovaRequest $request, $query)
     {
-        return $query->orderBy('departure', 'asc');
+        return $query->orderBy('departure', 'ASC');
     }
 
 
