@@ -22,6 +22,7 @@ use App\Nova\Filters\ExcursionDate;
 use App\Nova\Filters\ExcursionStartDate;
 use App\Nova\Filters\ExcursionLastDate;
 use App\Nova\Filters\ExcursionActive;
+use App\Nova\Filters\ExcursionsOrder;
 use Petar\ExcursionRecapitulation\ExcursionRecapitulation;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -147,10 +148,11 @@ class Excursion extends Resource
     {
         return [
             new ExcursionActive,
+            new ExcursionsOrder,
             new ExcursionTypeFilter,
             new ExcursionDate,
             new ExcursionStartDate,
-            new ExcursionLastDate
+            new ExcursionLastDate,
         ];
     }
 
