@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 
+
 class Excursion extends Model
 {
     use HasFactory;
@@ -16,6 +17,7 @@ class Excursion extends Model
     protected static function boot() {
 
         parent::boot();
+
         
         // SAVE OLD VALUE OF SEATS
         static::updating(function ($excursion) {

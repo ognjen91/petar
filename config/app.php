@@ -62,6 +62,8 @@ return [
     'admin_email' => env('ADMIN_EMAIL', '16minus8@gmail.com'),
     'admin_password' => env('ADMIN_PASSWORD', '12345678'),
     'seed_all' => env('SEED_ALL', 1),
+    'excursionAlmostFullEmail1' => env('EXCURSION_ALMOST_FULL_EMAIL_1', 'qzman16@gmail.com'),
+    'excursionAlmostFullEmail2' => env('EXCURSION_ALMOST_FULL_EMAIL_2', 'ognjen.kuzmanovic@hotmail.com'),
 
     'asset_url' => env('ASSET_URL', null),
 

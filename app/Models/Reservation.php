@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use App\Mail\ExcursionAlmostFull;
+
 
 class Reservation extends Model
 {
@@ -32,6 +34,10 @@ class Reservation extends Model
             if($reservation->child_seats){
                 $reservation->excursion->total_child_seats += $reservation->child_seats;
                 $reservation->excursion->save();
+            }
+
+            if($reservation->excursion->free_seats <= 0.15 * $reservation->excursion->total_seats){
+                \Mail::to([config('app.excursionAlmostFullEmail1'), config('app.excursionAlmostFullEmail2')])->send(new ExcursionAlmostFull($reservation->excursion));
             }
         });
     }
