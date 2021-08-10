@@ -95,7 +95,7 @@ class Excursion extends Resource
      */
     public function fields(Request $request)
     {
-        $reservations = Reservation::where('excursion_id', $this->id)->get();
+        $reservations = Reservation::where('excursion_id', $this->id)->active()->get();
         $uniqueStationIdsOfTheReservations = $reservations->unique('station_id')->pluck('station_id');
         $stations = Station::whereIn('id', $uniqueStationIdsOfTheReservations)->get();
 
