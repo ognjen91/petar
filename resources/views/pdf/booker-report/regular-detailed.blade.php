@@ -42,14 +42,14 @@
                         @foreach($reservations as $reservation)
                             @continue($reservation->isReturnWayDirectionReservation)
 
-                            <tr @if(!$reservation->active) style="color : red;" @endif>
+                            <tr @if($reservation->isCanceled) style="color : red;" @endif>
                                 @if(!$excursionType)<td style="text-align: left; padding-right: 55px; padding-top:5px;">{{$reservation->excursion->excursionType->name}}</td>@endif
                                 @if(!$booker)<td>{{$reservation->booker->name}}</td>@endif
                                 <td>{{\Carbon\Carbon::parse($reservation->excursion->departure)->format('d.m.Y.')}}</td>
                                 <td>{{\Carbon\Carbon::parse($reservation->excursion->departure)->format('H:i')}}</td>
                                 <td>{{$reservation->seats}}</td>
                                 <td>{{$reservation->price}}</td>
-                                <td>{{$reservation->active? (\Carbon\Carbon::parse($reservation->excursion->departure) < \Carbon\Carbon::now()? 'Aktivno' : 'Izvršeno') : 'Otkazano'}}</td>
+                                <td>{{!$reservation->isCanceled? (\Carbon\Carbon::parse($reservation->excursion->departure) < \Carbon\Carbon::now()? 'Aktivno' : 'Izvršeno') : 'Otkazano'}}</td>
                             </tr>
                             @endforeach
                             <tr>

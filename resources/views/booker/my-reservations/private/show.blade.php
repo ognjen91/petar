@@ -13,7 +13,7 @@
 
              @if($reservation->isInFuture)
                 {{-- FUTURE: IF NOT CANCELED --}}
-                 @if($reservation->active)
+                 @if(!$reservation->isCanceled)
                     <cancel-reservation-button
                     excursion-type="private"
                     class='my-5'
@@ -30,7 +30,7 @@
                 @endif
             @else
                 {{-- PAST: IF NOT CANCELED --}}
-                @if($reservation->active)
+                @if(!$reservation->isCanceled)
                     <h2 class='green--text'>Rezervacija je izvršena</h2>
                     <p class="mb-0">Otkazano: {{\Carbon\Carbon::parse($reservation->cancelation_time)->format('d.m.Y. H:i:s')}}</p>
                 @else

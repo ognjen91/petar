@@ -32,7 +32,7 @@
                     <th>Detalji</th>
                 </tr>
                 @foreach ($reservations as $reservation)
-                    <tr @class(['red--text' => !$reservation->active])>
+                    <tr @class(['red--text' => $reservation->isCanceled])>
                         <td>{{\Carbon\Carbon::parse($reservation->start)->format('d.m.Y')}}</td>
                         <td>{{\Carbon\Carbon::parse($reservation->end)->format('d.m.Y')}}</td>
                         <td>{{$reservation->price}}</td>

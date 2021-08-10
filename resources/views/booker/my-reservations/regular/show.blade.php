@@ -34,7 +34,7 @@
 
              @if($reservation->isInFuture)
                  {{-- FUTURE: IF SI NOT CANCELED --}}
-                 @if($reservation->active)
+                 @if(!$reservation->isCanceled)
                      <h4 class="red--text">Otkazivanje rezervacije</h4>
                     <cancel-reservation-button
                     excursion-type="regular"
@@ -60,7 +60,7 @@
                 @endif
             @else
                 {{-- PAST: IF NOT CANCELED --}}
-                @if($reservation->active)
+                @if(!$reservation->isCanceled)
                     <h2 class='green--text'>Rezervacija je izvršena</h2>
                     @else
                     {{-- PAST: IF CANCELED --}}

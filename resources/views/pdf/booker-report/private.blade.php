@@ -32,13 +32,13 @@
                     </thead>
                     <tbody>
                         @foreach($reservations as $reservation)
-                            <tr @if(!$reservation->active) style="color : red;" @endif>
+                            <tr @if($reservation->isCanceled) style="color : red;" @endif>
                                 <td>{{$reservation->title}}</td>
                                 @if(!$booker)<td>{{$reservation->booker->name}}</td>@endif
                                 <td>{{\Carbon\Carbon::parse($reservation->start)->format('d.m.Y. H:i')}}</td>
                                 <td>{{\Carbon\Carbon::parse($reservation->end)->format('d.m.Y. H:i')}}</td>
                                 <td>{{$reservation->price}}</td>
-                                <td>{{$reservation->active? (\Carbon\Carbon::parse($reservation->start) < \Carbon\Carbon::now()? 'Aktivno' : 'Izvršeno') : 'Otkazano'}}</td>
+                                <td>{{!$reservation->isCanceled? (\Carbon\Carbon::parse($reservation->start) < \Carbon\Carbon::now()? 'Aktivno' : 'Izvršeno') : 'Otkazano'}}</td>
                             </tr>
                             @endforeach
                             <tr>

@@ -44,8 +44,8 @@
                     @continue($reservation->isReturnWayDirectionReservation)
 
                     {{-- ROW DATA DISPLAY --}}
-                    <tr @class(['red--text' => !$reservation->active])>
-                        @if(!$excursionType)<td><a href="{{route('my-reservations.regular.show', $reservation->id)}}" @class(['red--text' => !$reservation->active])>{{$reservation->excursion->excursionType->name}}</a></td>@endif
+                    <tr @class(['red--text' => $reservation->isCanceled])>
+                        @if(!$excursionType)<td><a href="{{route('my-reservations.regular.show', $reservation->id)}}" @class(['red--text' => $reservation->isCanceled])>{{$reservation->excursion->excursionType->name}}</a></td>@endif
                         <td>{{\Carbon\Carbon::parse($reservation->excursion->departure)->format('d.m.Y')}}</td>
                         <td>{{$reservation->seats}}</td>
                         <td>{{$reservation->price}}</td>

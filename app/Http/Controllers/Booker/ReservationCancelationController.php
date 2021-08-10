@@ -19,7 +19,7 @@ class ReservationCancelationController extends Controller
                 ], 501); 
             }
         
-        if(!$reservation->active){
+        if($reservation->isCanceled){
                 return response()->json([
                         'status' => 'Greška! Rezervacija je već otkazana.'
                 ], 501); 
