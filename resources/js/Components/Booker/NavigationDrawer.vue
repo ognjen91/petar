@@ -80,6 +80,7 @@ import axios from 'axios'
           { title: 'Nova privatna tura', link: '/privatne-ture/nova' },
           { title: 'Moje rezervacije redovnih izleta', link: '/moje-rezervacije/redovni' },
           { title: 'Moje rezervacije privatnih izleta', link: '/moje-rezervacije/privatni' },
+          { title: 'Moji podaci', link: '/podaci/izmjena' },
         ],
       }
     },

@@ -10,6 +10,7 @@ use App\Http\Controllers\Booker\BookerPrivateExcursionsReservationsController;
 use App\Http\Controllers\Booker\PrivateExcursionsReservationController;
 use App\Http\Controllers\Booker\BookerPdfReportController;
 use App\Http\Controllers\Booker\DownloadBookerPdfReport;
+use App\Http\Controllers\Booker\UpdateProfileDataController;
 use App\Http\Controllers\Booker\ReservationCancelationController;
 use App\Http\Controllers\Crew\ExcursionStationReservationsController;
 /*
@@ -38,6 +39,8 @@ Route::domain(config('app.booker_subdomain'))
     Route::post('private-tours', [PrivateExcursionsReservationController::class, 'store'])->name('private-excursions.store');
     Route::post('/book', BookController::class);
     Route::post('/cancel-reservation/{reservation}', ReservationCancelationController::class);
+    Route::get('podaci/izmjena', [UpdateProfileDataController::class, 'edit'])->name('booker.profile.edit');
+    Route::patch('profile/update', [UpdateProfileDataController::class, 'update'])->name('booker.profile.update');
 });
 
 // CREW ROUTES
