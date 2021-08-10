@@ -37,7 +37,7 @@ class Reservation extends Model
             }
 
             if($reservation->excursion->free_seats <= 0.15 * $reservation->excursion->total_seats){
-                \Mail::to([config('app.excursionAlmostFullEmail1'), config('app.excursionAlmostFullEmail2')])->send(new ExcursionAlmostFull($reservation->excursion));
+                // \Mail::to([config('app.excursionAlmostFullEmail1'), config('app.excursionAlmostFullEmail2')])->send(new ExcursionAlmostFull($reservation->excursion));
             }
         });
     }

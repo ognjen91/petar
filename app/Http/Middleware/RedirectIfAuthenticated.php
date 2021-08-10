@@ -24,7 +24,7 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 // return redirect(RouteServiceProvider::HOME);
-                if(auth()->user()->hasRole('Booker')) return route('booker.home'); 
+                if(auth()->user()->hasRole('Booker')) return route('booker.homepage'); 
                 if(auth()->user()->hasRole('Crew Member')) return route('crew.home'); 
                 return redirect(RouteServiceProvider::HOME);
             }
