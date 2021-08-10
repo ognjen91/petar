@@ -45,4 +45,8 @@ class PrivateExcursionReservation extends Model
     public function getIsInFutureAttribute(){
         return Carbon::parse($this->start) > Carbon::now();
     }
+
+    public function getIsCanceledAttribute(){
+        return !!$this->cancelation_time;
+    }
 }

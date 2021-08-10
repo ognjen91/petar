@@ -31,8 +31,9 @@ class BookerPrivateExcursionsReservationsController extends Controller
         //if end date is set
         if($request->endDate) $reservations = $reservations->where('end', '<=' , $request->endDate);
         
+        $reservationsHelper = clone $reservations;
+        $totalPrice = $reservationsHelper->active()->sum('price');
         
-        $totalPrice = $reservations->active()->sum('price');
         $reservations = $reservations->orderBy('start', 'desc')->get();
         
         

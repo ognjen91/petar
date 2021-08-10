@@ -41,10 +41,10 @@ class BookerRegularExcursionsReservationsController extends Controller
             $query->where('excursion_type_id',  $request->excursionType);
         });
 
-        $totalPrice = $reservations->active()->sum('price');
-        $totalSeats = $reservations->active()->sum('seats');
+        $reservationsHelper = clone $reservations;
+        $totalPrice = $reservationsHelper->active()->sum('price');
+        $totalSeats = $reservationsHelper->active()->sum('seats');
         
-        // $reservations = $reservations->orderBy('created_at', 'desc')->paginate(50);
         $reservations = $reservations->orderBy('created_at', 'desc')->get();
 
         if($request->order == 'asc'){
