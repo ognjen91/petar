@@ -18,8 +18,9 @@
         "laravel/nova": "*",
         "laravel/tinker": "^2.5",
         "petar/excursion-free-seats": "*",
+        "petar/excursion-recapitulation": "*",
         "spatie/laravel-permission": "^4.2",
-        "petar/excursion-recapitulation": "*"
+        "vonage/client": "^2.4"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

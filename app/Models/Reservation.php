@@ -36,8 +36,29 @@ class Reservation extends Model
                 $reservation->excursion->save();
             }
 
-            if($reservation->excursion->free_seats <= 0.15 * $reservation->excursion->total_seats){
-                // \Mail::to([config('app.excursionAlmostFullEmail1'), config('app.excursionAlmostFullEmail2')])->send(new ExcursionAlmostFull($reservation->excursion));
+            if ($reservation->excursion->free_seats <= 0.15 * $reservation->excursion->total_seats) {
+                // SEND SMS
+                try {
+                    $basic  = new \Nexmo\Client\Credentials\Basic(config('app.nexmoSmsApiKey'), config('app.nexmoSmsApiSecret'));
+                    $client = new \Nexmo\Client($basic);
+                    
+                    $message = $client->message()->send([
+                        'to' => config('app.numberToSendExcursionCapacityAlert'),
+                        'from' => 'OSAM',
+                        'text' => 'Upozorenje: predjeno je 85% kapaciteta za ' . $reservation->excursion->name
+                    ]);
+                } catch (\Exception $e) {
+                    //todo: log
+                }
+                
+                // SEND EMAIL
+                try {
+                    if ($reservation->excursion->free_seats <= 0.15 * $reservation->excursion->total_seats) {
+                        \Mail::to([config('app.excursionAlmostFullEmail1'), config('app.excursionAlmostFullEmail2')])->send(new ExcursionAlmostFull($reservation->excursion));
+                    }
+                } catch (\Exception $e) {
+                    //todo: log
+                }
             }
         });
     }

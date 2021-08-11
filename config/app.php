@@ -64,6 +64,9 @@ return [
     'seed_all' => env('SEED_ALL', 1),
     'excursionAlmostFullEmail1' => env('EXCURSION_ALMOST_FULL_EMAIL_1', 'qzman16@gmail.com'),
     'excursionAlmostFullEmail2' => env('EXCURSION_ALMOST_FULL_EMAIL_2', 'ognjen.kuzmanovic@hotmail.com'),
+    'nexmoSmsApiKey' => env('NEXMO_SMS_API_KEY', 'xxx'),
+    'nexmoSmsApiSecret' => env('NEXMO_SMS_API_SECRET', 'xxxxxxxxx'),
+    'numberToSendExcursionCapacityAlert' => env('NUMBER_TO_SEND_EXCURSION_CAPACITY_ALERT', '381642775900'),
 
     'asset_url' => env('ASSET_URL', null),
 
