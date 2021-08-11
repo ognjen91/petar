@@ -23,8 +23,8 @@ class BookerRegularExcursionsReservationsController extends Controller
         $request->endDate = $request->endDate?? '2021-12-31';
 
         $excursionType = $request->excursionType? ExcursionType::find($request->excursionType) : null;
-        $startDate = $request->startDate? Carbon::parse($request->startDate)->format('Y-m-d') : '2021-12-31';
-        $endDate = $request->endDate? Carbon::parse($request->endDate)->format('Y-m-d') : null;
+        $startDate = Carbon::parse($request->startDate)->format('Y-m-d');
+        $endDate = Carbon::parse($request->endDate)->format('Y-m-d');
 
         //if start date is set
         if($request->startDate) $reservations = $reservations->whereHas('excursion', function (Builder $query) use ($request) {

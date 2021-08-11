@@ -100,7 +100,7 @@ class DatabaseSeeder extends Seeder
         ExcursionType::factory(8)->create()->each(function($excType){
             $excursions = Excursion::factory(5)->create([
                 ])->each(function($excursion){
-                    $reservations = Reservation::factory(5)->create([
+                    $reservations = Reservation::factory(1)->create([
                         'booker_id' => [$this->booker1->id, $this->booker2->id][rand(0,1)],
                         'excursion_id' => $excursion->id,
                         'station_id' => $this->stations->random(1)[0]
