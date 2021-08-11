@@ -17,35 +17,35 @@ class BookerRegularExcursionsReservationsController extends Controller
     public function index(Request $request){
         $excursionTypes = ExcursionTypeResource::collection(ExcursionType::all())->resolve();
 
-        $reservations = Reservation::where('booker_id', auth()->user()->id);
+        $reservations = Reservation::where('booker_id', auth()->user()->id)->notReturnWay();
 
         // $request->startDate = $request->startDate?? '2021-07-01';
         // $request->endDate = $request->endDate?? '2021-12-31';
 
         $startDate = null;
         $endDate = null;
-        $excursionType = $request->excursionType? ExcursionType::find($request->excursionType) : null;
         if($request->startDate) $startDate = Carbon::parse($request->startDate);
         if($request->endDate) $endDate = Carbon::parse($request->endDate);
-
+        
         //if start date is set
         if($startDate) $reservations = $reservations->whereHas('excursion', function (Builder $query) use ($startDate) {
             $query->where('departure', '>=', $startDate->toDateTimeString());
         });
-
+        
         //if end date is set
         if($endDate) $reservations = $reservations->whereHas('excursion', function (Builder $query) use ($endDate) {
             $query->where('departure', '<=', $endDate->toDateTimeString());
         });
-
+        
         // format date for displaying on front
         if($startDate) $startDate = $startDate->format('d.m.Y.');
         if($endDate) $endDate = $endDate->format('d.m.Y.');
-
-
+        
+        
         //if excursion type is set
-        if($request->excursionType) $reservations = $reservations->whereHas('excursion', function (Builder $query) use ($request) {
-            $query->where('excursion_type_id',  $request->excursionType);
+        $excursionType = $request->excursionType? ExcursionType::find($request->excursionType) : null;
+        if($excursionType) $reservations = $reservations->whereHas('excursion', function (Builder $query) use ($excursionType) {
+            $query->where('excursion_type_id',  $excursionType->id);
         });
 
         $reservationsHelper = clone $reservations;

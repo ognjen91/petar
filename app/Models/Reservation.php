@@ -80,6 +80,10 @@ class Reservation extends Model
         // return $query->where('active', 1);
         return $query->whereNull('cancelation_time');
     }
+    
+    public function scopeNotReturnWay($query){
+        return $query->whereNull('first_direction_reservation_id');
+    }
 
     /**
      * ACCESSORS
