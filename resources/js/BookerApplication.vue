@@ -15,8 +15,10 @@
         />
 
         <!-- SELECT STATION -->
+        <h3 :class="{'red--text' : !selectedStationId}" v-if="selectedExcursionType">Molimo odaberite stanicu</h3>
+
         <StationSelect
-        v-if="this.selectedExcursionType"
+        v-if="selectedExcursionType"
         :stations="selectedExcursionTypesStations"
         @stationSelected="proceedStationSelected"
         />
@@ -39,7 +41,7 @@
                     <input id="childSeats" type="number" placeholder="Broj mjesta za djecu" v-model="childSeats" min="0">
                 </div>
                 <div class="">
-                    <label for="price"><strong>Naplaćeni iznos</strong></label><br>
+                    <label for="price" :class="{'red--text font-weight-bold' : !price}"><strong>Naplaćeni iznos</strong></label><br>
                     <input id="price" type="number" placeholder="iznos u evrima" v-model="price" min="0" step="0.1">
                 </div>
              </v-col>
@@ -48,7 +50,9 @@
         <!-- ======EXCURSION SELECT====== -->
         <v-row>
             <!-- MAIN DIRECTION -->
-            <v-col cols="12">
+            <v-col cols="12" v-if="excursionsOnTheDateWithEnoughSeats.length">
+                <h3 :class="{'red--text' : !selectedExcursionId}">Molimo odaberite vrijeme polaska</h3>
+
                 <ExcursionsOnTheDateWithEnoughSeats 
                 :excursions="excursionsOnTheDateWithEnoughSeats"
                 @excursionSelected="proceedExcursionSelected"
@@ -58,7 +62,7 @@
 
             <!-- CONNECTED DIRECTION, IF EXIST -->
             <v-col cols="12" v-if="connectedTypesExist">
-                <h3 class="danger-text">Molimo odaberite povratak</h3>
+                <h3 :class="{'red--text' : !selectedConnectedExcursionId}">Molimo odaberite vrijeme povratka</h3>
 
                 <ExcursionsOnTheDateWithEnoughSeats 
                 :excursions="connectedExcursionsOnTheDateWithEnoughSeats"
@@ -111,6 +115,17 @@
                 Molimo odaberite parametre
                 </v-btn>
 
+
+             </v-col>
+
+             <v-col cols='12' v-if="!selectedExcursionType || !price || !selectedStationId || !selectedExcursionId || (connectedTypesExist && !selectedExcursionId)">
+                 <h2 class='red--text'><u><strong>Pomoć:</strong></u></h2>
+                 <h3 class='red--text'>Ne možete da bukirate izlet jer:</h3>
+                 <p class="mb-1 red--text font-weight-bold" v-if="!selectedExcursionType">Nije odabran izlet</p>
+                 <p class="mb-1 red--text font-weight-bold" v-if="!price">Nije unesena cijena</p>
+                 <p class="mb-1 red--text font-weight-bold" v-if="!selectedStationId">Nije izabrana stanica</p>
+                 <p class="mb-1 red--text font-weight-bold" v-if="!selectedExcursionId">Nije izabrano vrijeme polaska</p>
+                 <p class="mb-1 red--text font-weight-bold" v-if="connectedTypesExist && !selectedExcursionId">Nije izabrano vrijeme povratka</p>
              </v-col>
         </v-row>
 

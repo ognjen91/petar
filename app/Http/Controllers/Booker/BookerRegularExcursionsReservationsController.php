@@ -54,14 +54,16 @@ class BookerRegularExcursionsReservationsController extends Controller
 
         $reservations = $reservations->orderBy('created_at', 'desc')->get();
 
-        if($request->order == 'asc'){
-            $reservations = $reservations->sortBy(function ($reservation, $key) {
-                return $reservation->excursion->departure;
-            });
-        }else{
-            $reservations = $reservations->sortByDesc(function ($reservation, $key) {
-                return $reservation->excursion->departure;
-            });
+        if($reservations->count()){
+            if($request->order == 'asc'){
+                $reservations = $reservations->sortBy(function ($reservation, $key) {
+                    return $reservation->excursion->departure;
+                });
+            } else {
+                $reservations = $reservations->sortByDesc(function ($reservation, $key) {
+                    return $reservation->excursion->departure;
+                });
+            }
         }
 
 
