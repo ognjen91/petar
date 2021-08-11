@@ -42,6 +42,7 @@ class DownloadBookerPdfReport extends Controller
         
         // FORMAT RESERVATIONS
         $reservations = $booker? $booker->reservations() : Reservation::where('seats', '>', 0); //bookers reservations or some default query
+        $reservations = $reservations->notReturnWay();
 
         //take in count selected excursion type, if selected
         if($excursionType) $reservations->whereHas('excursion', function (Builder $query) use ($excursionType) {
