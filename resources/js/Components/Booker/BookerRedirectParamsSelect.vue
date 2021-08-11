@@ -132,8 +132,8 @@ export default {
         redirect(){
             let url = `${this.baseUrl}?`
             if(this.selectedType.id) url += `excursionType=${this.selectedType.id}&`
-            if(this.startDate) url += `type=${this.startDate}&`
-            if(this.endDate) url += `type=${this.endDate}&`
+            if(this.startDate) url += `startDate=${this.startDate}&`
+            if(this.endDate) url += `endDate=${this.endDate}&`
             if(this.selectedOrder) url += `order=${this.selectedOrder}&`
 
             window.location.href = url;
