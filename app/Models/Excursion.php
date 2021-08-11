@@ -12,7 +12,7 @@ class Excursion extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['excursion_type_id', 'departure', 'total_seats', 'total_child_seats'];
+    protected $fillable = ['excursion_type_id', 'departure', 'total_seats', 'total_child_seats', 'almost_full_notification_sent'];
 
     protected static function boot() {
 
