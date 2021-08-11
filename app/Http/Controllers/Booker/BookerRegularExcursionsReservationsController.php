@@ -54,7 +54,7 @@ class BookerRegularExcursionsReservationsController extends Controller
 
         $reservations = $reservations->orderBy('created_at', 'desc')->get();
 
-        if($reservations->count()){
+        if($reservations){
             if($request->order == 'asc'){
                 $reservations = $reservations->sortBy(function ($reservation, $key) {
                     return $reservation->excursion->departure;
