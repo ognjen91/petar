@@ -25,6 +25,7 @@
                 input-id="startDate"
                 :class="{'not-selected' : !start}"
                 :min-datetime="min"
+                value-zone="UTC+2"
                 >
                     <label for="startDate" slot="before">
                         <span v-if="!start">Kliklite <span class="red--text">ovdje </span> da odaberete datum i vrijeme početka izleta</span>        
@@ -42,6 +43,7 @@
                 input-id="endDate"
                 :class="{'not-selected' : !end}"
                 :min-datetime="min"
+                value-zone="UTC+2"
                 >
                     <label for="endDate" slot="before">
                         <span v-if="!end">Kliklite <span class="red--text">ovdje </span> da odaberete datum i vrijeme kraja izleta</span>        
@@ -144,7 +146,7 @@ export default {
             }).then(({data}) => {
               this.showSuccessDialog = true
                 setTimeout(()=>{
-                    location.reload();
+                    // location.reload();
                 }, 4000)
             })
             .catch((error) => {
