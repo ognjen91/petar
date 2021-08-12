@@ -19,8 +19,6 @@ class BookerPrivateExcursionsReservationsController extends Controller
 
         $reservations = PrivateExcursionReservation::where('booker_id', auth()->user()->id);
         
-        // $request->startDate = $request->startDate?? '2021-07-01';
-        // $request->endDate = $request->endDate?? '2021-12-31';
         
         $startDate = $request->startDate? Carbon::parse($request->startDate)->format('Y-m-d') : null;
         $endDate = $request->endDate? Carbon::parse($request->endDate)->format('Y-m-d') : null;

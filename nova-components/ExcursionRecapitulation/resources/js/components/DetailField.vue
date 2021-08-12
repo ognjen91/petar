@@ -43,7 +43,7 @@ export default {
                 let childSeats = 0
                 for(let j=0; j<stationReservations.length; j++){
                     seats += parseInt(stationReservations[j]['seats'])
-                    childSeats += parseInt(stationReservations[j]['child_seats'])
+                    childSeats += +parseInt(stationReservations[j]['child_seats'])
                 }
 
                 reservationsByStation.push({
