@@ -28,6 +28,6 @@
             {{ $slot }}
             <booker-footer></booker-footer>
         </v-app>
-        <script src="{{asset('js/booker.js')}}"></script>
+        <script src="{{asset('js/booker.js')}}?v=1.01"></script>
     </body>
 </html>
