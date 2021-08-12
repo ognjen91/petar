@@ -146,7 +146,7 @@ export default {
             }).then(({data}) => {
               this.showSuccessDialog = true
                 setTimeout(()=>{
-                    // location.reload();
+                    location.reload();
                 }, 4000)
             })
             .catch((error) => {

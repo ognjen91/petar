@@ -27,7 +27,6 @@ class PrivateExcursionsReservationController extends Controller
 
     public function store(PrivateTourReservationRequest $request){
         $validatedData = $request->validated();
-        dd($validatedData);
         $validatedData['booker_id'] = auth()->id();
         $reservation = PrivateExcursionReservation::create($validatedData);
 
