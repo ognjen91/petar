@@ -19,21 +19,22 @@ class BookerPrivateExcursionsReservationsController extends Controller
 
         $reservations = PrivateExcursionReservation::where('booker_id', auth()->user()->id);
         
-        $request->startDate = $request->startDate?? '2021-07-01';
-        $request->endDate = $request->endDate?? '2021-12-31';
+        // $request->startDate = $request->startDate?? '2021-07-01';
+        // $request->endDate = $request->endDate?? '2021-12-31';
         
-        $startDate = $request->startDate? Carbon::parse($request->startDate)->format('Y-m-d') : '2021-12-31';
+        $startDate = $request->startDate? Carbon::parse($request->startDate)->format('Y-m-d') : null;
         $endDate = $request->endDate? Carbon::parse($request->endDate)->format('Y-m-d') : null;
         
         //if start date is set
-        if($request->startDate) $reservations = $reservations->where('start', '>=' , $request->startDate);
+        if($startDate) $reservations = $reservations->where('start', '>=' , $request->startDate);
         
         //if end date is set
-        if($request->endDate) $reservations = $reservations->where('end', '<=' , $request->endDate);
+        if($endDate) $reservations = $reservations->where('end', '<=' , $request->endDate);
         
         $reservationsHelper = clone $reservations;
         $totalPrice = $reservationsHelper->active()->sum('price');
-        
+        // dd($totalPrice);
+
         $reservations = $reservations->orderBy('start', 'desc')->get();
         
         
