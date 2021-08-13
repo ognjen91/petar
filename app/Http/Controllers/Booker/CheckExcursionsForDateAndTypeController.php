@@ -32,7 +32,7 @@ class CheckExcursionsForDateAndTypeController extends Controller
                 $query->whereIn('id', $connectedExcursionTypesIds);
             })
             ->whereDate('departure', '=', $theDay->toDateString())
-            ->whereDate('departure', '>', Carbon::now()->toDateTimeString())
+            ->whereDate('departure', '>=', Carbon::now()->toDateTimeString())
             ->orderBy('departure', 'asc')
             ->get();
         }
