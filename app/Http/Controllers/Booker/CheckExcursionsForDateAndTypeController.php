@@ -15,7 +15,8 @@ class CheckExcursionsForDateAndTypeController extends Controller
     public function __invoke(Request $request){
         $excursions = Excursion::where('excursion_type_id', $request->selectedExcursionTypeId)
                                 ->whereDate('departure', '=', Carbon::parse($request->selectedDate)->toDateString())
-                                ->whereDate('departure', '>', Carbon::now()->toDateTimeString())
+                                // ->whereDate('departure', '>=', Carbon::now()->toDateString())
+                                ->where('departure', '>=', Carbon::now())
                                 ->orderBy('departure', 'asc')
                                 ->get();
 
@@ -32,7 +33,8 @@ class CheckExcursionsForDateAndTypeController extends Controller
                 $query->whereIn('id', $connectedExcursionTypesIds);
             })
             ->whereDate('departure', '=', $theDay->toDateString())
-            ->whereDate('departure', '>=', Carbon::now()->toDateTimeString())
+            ->where('departure', '>=', Carbon::now())
+            // ->whereDate('departure', '>=', Carbon::now()->toDateTimeString())
             ->orderBy('departure', 'asc')
             ->get();
         }
