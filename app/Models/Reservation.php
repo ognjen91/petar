@@ -45,7 +45,7 @@ class Reservation extends Model
                     $response = $client->message()->send([
                         'to' => config('app.numberToSendExcursionCapacityAlert'),
                         'from' => 'OSAM',
-                        'text' => 'Upozorenje: predjeno je 85% kapaciteta za ' . $reservation->excursion->name
+                        'text' => 'Upozorenje: predjeno je 85% kapaciteta za ' . $reservation->excursion->name . " " . Carbon::parse($reservation->excursion->departure)->format('d.m.Y.')
                     ]);
 
                     $message = $response->current();
