@@ -7,6 +7,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Select;
 use App\Models\ExcursionType;
 use App\Models\Reservation;
@@ -122,6 +123,7 @@ class Excursion extends Resource
 
         ];
 
+        if(auth()->user()->isSuperAdmin) $fields[] = Boolean::make('Poruku o upozorenju poslata', 'almost_full_notification_sent')->readonly();
         // $fields[] =  Select::make('Izleta', 'type')->options($excursionsTypeArray);
 
         return $fields;
