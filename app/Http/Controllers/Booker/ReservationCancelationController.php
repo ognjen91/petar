@@ -49,15 +49,15 @@ class ReservationCancelationController extends Controller
         
         //update total_seats of the regular excursion
         if($request->excursion_type == 'regular'){
-                $reservation->excursion->total_seats += $reservation->seats;
-                $reservation->excursion->total_child_seats += $reservation->child_seats;
+                $reservation->excursion->total_seats = $reservation->excursion->freeSeats + $reservation->seats;
+                $reservation->excursion->total_child_seats -= $reservation->child_seats;
                 $reservation->excursion->save();
                 
                 // FOR RETURN WAY AS WELL, IF NOT ALREADY CANCELED!
                 if ($reservation->returnDirectionReservation) {
                         if(!$reservation->returnDirectionReservation->isCanceled){
-                                $reservation->returnDirectionReservation->excursion->total_seats += $reservation->seats;
-                                $reservation->returnDirectionReservation->excursion->total_child_seats += $reservation->child_seats;
+                                $reservation->returnDirectionReservation->excursion->total_seats = $reservation->returnDirectionReservation->excursion->freeSeats + $reservation->seats;
+                                $reservation->returnDirectionReservation->excursion->total_child_seats -= $reservation->child_seats;
                                 $reservation->returnDirectionReservation->excursion->save();
                         }
                 }
