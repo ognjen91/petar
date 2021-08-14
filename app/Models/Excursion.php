@@ -39,6 +39,15 @@ class Excursion extends Model
                 ]);
             }
         });
+
+        //IF RESERVATION IS CANCELED, RESTORE POSIBILITY OF SENDING ALERT
+        static::updated(function ($excursion) {
+            if($excursion->freeSeats > 0.15 * $excursion->total_seats && $excursion->almost_full_notification_sent){
+                $excursion->update([
+                    'almost_full_notification_sent' => 0
+                ]);
+            }
+        });
     }
 
     /**
