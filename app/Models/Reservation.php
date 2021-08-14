@@ -36,7 +36,7 @@ class Reservation extends Model
                 $reservation->excursion->save();
             }
 
-            if ($reservation->excursion->free_seats <= 0.15 * $reservation->excursion->total_seats && !$reservation->excursion->almost_full_notification_sent) {
+            if ($reservation->excursion->freeSeats <= 0.15 * $reservation->excursion->total_seats && !$reservation->excursion->almost_full_notification_sent) {
                 // SEND SMS
                 try {
                     $basic  = new \Nexmo\Client\Credentials\Basic(config('app.nexmoSmsApiKey'), config('app.nexmoSmsApiSecret'));
@@ -62,7 +62,7 @@ class Reservation extends Model
                 
                 // SEND EMAIL
                 try {
-                    if ($reservation->excursion->free_seats <= 0.15 * $reservation->excursion->total_seats) {
+                    if ($reservation->excursion->freeSeats <= 0.15 * $reservation->excursion->total_seats) {
                         \Mail::to([config('app.excursionAlmostFullEmail1'), config('app.excursionAlmostFullEmail2')])->send(new ExcursionAlmostFull($reservation->excursion));
                     }
                 } catch (\Exception $e) {
