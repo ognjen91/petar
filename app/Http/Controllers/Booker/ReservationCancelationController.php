@@ -33,19 +33,6 @@ class ReservationCancelationController extends Controller
                 }
         }
 
-            
-        $reservation->update([
-                'active' => 0,
-                'cancelation_time' => Carbon::now()->toDateTimeString()
-        ]);
-        
-        // CANCEL RETURN WAY RESERVATION AS WELL, IF EXISTS
-        if($reservation->returnDirectionReservation){
-                $reservation->returnDirectionReservation->update([
-                        'active' => 0,
-                        'cancelation_time' => Carbon::now()->toDateTimeString()
-                ]);   
-        }
         
         //update total_seats of the regular excursion
         if($request->excursion_type == 'regular'){
@@ -62,6 +49,19 @@ class ReservationCancelationController extends Controller
                         }
                 }
                 
+        }
+
+        $reservation->update([
+                'active' => 0,
+                'cancelation_time' => Carbon::now()->toDateTimeString()
+        ]);
+        
+        // CANCEL RETURN WAY RESERVATION AS WELL, IF EXISTS
+        if($reservation->returnDirectionReservation){
+                $reservation->returnDirectionReservation->update([
+                        'active' => 0,
+                        'cancelation_time' => Carbon::now()->toDateTimeString()
+                ]);   
         }
 
         return response()->json([
