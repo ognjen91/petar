@@ -123,7 +123,7 @@ class Excursion extends Resource
 
         ];
 
-        if(auth()->user()->isSuperAdmin) $fields[] = Boolean::make('Poruku o upozorenju poslata', 'almost_full_notification_sent')->readonly();
+        if(auth()->user()->isSuperAdmin) $fields[] = Boolean::make('Poruku o upozorenju poslata', 'almost_full_notification_sent')->readonly()->onlyOnDetail();
         // $fields[] =  Select::make('Izleta', 'type')->options($excursionsTypeArray);
 
         return $fields;
