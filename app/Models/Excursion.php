@@ -23,7 +23,7 @@ class Excursion extends Model
         static::updating(function ($excursion) {
 
             //if new number is less than number of free seats
-            $totalSeatsReserved = $excursion->reservations->sum('seats');
+            $totalSeatsReserved = $excursion->reservations()->active()->get()->sum('seats');
 
             if($excursion->total_seats < $totalSeatsReserved){
                 $excursion->total_seats = $excursion->getOriginal('total_seats');
