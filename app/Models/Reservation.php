@@ -72,13 +72,13 @@ class Reservation extends Model
         });
 
         //IF RESERVATION IS CANCELED, RESTORE POSIBILITY OF SENDING ALERT
-        static::updated(function ($reservation) {
-            if($reservation->excursion->freeSeats > 0.15 * $reservation->excursion->total_seats && $reservation->excursion->almost_full_notification_sent){
-                $reservation->excursion->update([
-                    'almost_full_notification_sent' => 0
-                ]);
-            }
-        });
+        // static::updated(function ($reservation) {
+        //     if($reservation->excursion->freeSeats > 0.15 * $reservation->excursion->total_seats && $reservation->excursion->almost_full_notification_sent){
+        //         $reservation->excursion->update([
+        //             'almost_full_notification_sent' => 0
+        //         ]);
+        //     }
+        // });
     }
 
     /**
