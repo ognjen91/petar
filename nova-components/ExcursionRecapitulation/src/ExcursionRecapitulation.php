@@ -17,12 +17,13 @@ class ExcursionRecapitulation extends Field
      */
     public $component = 'excursion-recapitulation';
 
-    public function passToVueComponent($reservations, $stations)
+    public function passToVueComponent($reservations, $stations, $bookers)
     {
         
         return $this->withMeta([
             'reservations' => $reservations,
-            'stations' => $stations
+            'stations' => $stations,
+            'bookers' => $bookers
         ]);
     }
 }

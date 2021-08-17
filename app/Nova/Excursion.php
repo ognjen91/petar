@@ -12,6 +12,7 @@ use Laravel\Nova\Fields\Select;
 use App\Models\ExcursionType;
 use App\Models\Reservation;
 use App\Models\Station;
+use App\Models\User;
 use Carbon\Carbon;
 
 use Laravel\Nova\Fields\HasMany;
@@ -98,7 +99,9 @@ class Excursion extends Resource
     {
         $reservations = Reservation::where('excursion_id', $this->id)->active()->get();
         $uniqueStationIdsOfTheReservations = $reservations->unique('station_id')->pluck('station_id');
+        $uniqueBookersIds = $reservations->unique('booker_id')->pluck('booker_id');
         $stations = Station::whereIn('id', $uniqueStationIdsOfTheReservations)->get();
+        $bookers = User::whereIn('id', $uniqueBookersIds)->get();
 
         $excursionsType = ExcursionType::all();
         $excursionsTypeArray = [];
@@ -107,7 +110,7 @@ class Excursion extends Resource
         }
 
         $fields = [
-            ExcursionRecapitulation::make('Rekapitulacija')->onlyOnDetail()->passToVueComponent($reservations, $stations),
+            ExcursionRecapitulation::make('Rekapitulacija')->onlyOnDetail()->passToVueComponent($reservations, $stations, $bookers),
             ID::make(__('ID'), 'id')->sortable(),
             Number::make('Ukupan broj mjesta', 'total_seats'),
             ExcursionFreeSeats::make('Broj slobodnih mjesta')
