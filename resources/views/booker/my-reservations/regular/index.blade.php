@@ -40,13 +40,15 @@
                     <th>Detalji</th>
                 </tr>
                 @foreach ($reservations as $reservation)
+                    {{-- @continue(!$reservation->excursion) --}}
+                    {{-- @if(!$reservation->excursion) {{dd($reservation)}} @endif --}}
                     {{-- DISPLAY ONLY IF IT IS NOT RETURN WAY RESEVATION! --}}
                     @continue($reservation->isReturnWayDirectionReservation)
 
                     {{-- ROW DATA DISPLAY --}}
                     <tr @class(['red--text' => $reservation->isCanceled])>
-                        @if(!$excursionType)<td><a href="{{route('my-reservations.regular.show', $reservation->id)}}" @class(['red--text' => $reservation->isCanceled])>{{$reservation->excursion->excursionType->name}}</a></td>@endif
-                        <td>{{\Carbon\Carbon::parse($reservation->excursion->departure)->format('d.m.Y')}}</td>
+                        @if(!$excursionType)<td><a href="{{route('my-reservations.regular.show', $reservation->id)}}" @class(['red--text' => $reservation->isCanceled])>{{$reservation->excursion? $reservation->excursion->excursionType->name : '(izbrisan izlet)'}}</a></td>@endif
+                        <td>{{$reservation->excursion? \Carbon\Carbon::parse($reservation->excursion->departure)->format('d.m.Y') : '(izbrisan izlet)'}}</td>
                         <td>{{$reservation->seats}}</td>
                         <td>{{$reservation->price}}</td>
                         <td>
